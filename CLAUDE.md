@@ -36,6 +36,7 @@ Este archivo resume todo lo acordado en el chat donde se construyó el sitio (se
 - **Portada:** 3 tarjetas grandes que crecen con la pantalla; todo entra sin bajar en escritorio.
 - **Cookies:** aviso con Aceptar/Rechazar (mismo peso); Google Analytics solo se carga si acepta; "Preferencias de cookies" en el pie lo reabre.
 - Fotos de clientes con personajes licenciados: el usuario tiene los derechos (no volver a advertir por esas).
+- Foto principal de Crea tu marca (`marca-principal.jpg`, polo con un personaje que hace un gesto con el dedo medio): el usuario decidió dejarla por ahora (28-sep). No volver a advertir.
 - Confirmados por el usuario: "Emitimos factura" y las características de los productos de Crea tu marca (incluidas las de Acrílicos).
 
 ## Pendientes (al 28-sep-2026, actualizado)
