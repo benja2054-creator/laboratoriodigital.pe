@@ -47,7 +47,9 @@ export default function Mazo({ imagenes = {} }: { imagenes?: Record<string, Imag
   const [vistaModulos, setVistaModulos] = useState(false); // solo celular
   const [hojaAbierta, setHojaAbierta] = useState(false);
   const [anuncio, setAnuncio] = useState('');
-  const [enfocado, setEnfocado] = useState<string | null>(null); // módulo bajo el mouse o con foco
+  // Módulo bajo el mouse o con foco. En celular no se usa: la carta siempre
+  // muestra su dibujo y sus datos, sin foto ni título del módulo.
+  const [enfocado, setEnfocado] = useState<string | null>(null);
   const [cargado, setCargado] = useState(false);
 
   const refHoja = useRef<HTMLDialogElement>(null);
@@ -218,7 +220,7 @@ export default function Mazo({ imagenes = {} }: { imagenes?: Record<string, Imag
             salir de toda la lista vuelve a su dibujo (evita parpadeos en los espacios). */}
         <div class="mz-modulos__lista" onMouseLeave={() => setEnfocado(null)}>
           {modulosAbiertos.map((m) => (
-            <TarjetaModulo key={m.id} modulo={m} clase={claseAbierta} enMazo={mazo.includes(m.id)} onAlternar={() => alternarModulo(m.id)} onEnfocar={(activo) => setEnfocado((actual) => (activo ? m.id : actual === m.id ? null : actual))} />
+            <TarjetaModulo key={m.id} modulo={m} clase={claseAbierta} enMazo={mazo.includes(m.id)} onAlternar={() => alternarModulo(m.id)} onEnfocar={(activo) => !esCelular() && setEnfocado((actual) => (activo ? m.id : actual === m.id ? null : actual))} />
           ))}
         </div>
       </section>

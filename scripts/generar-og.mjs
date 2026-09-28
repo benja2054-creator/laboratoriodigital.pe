@@ -10,7 +10,8 @@
 // abajo; las imágenes generadas se guardan en el repo.
 
 import { execFileSync } from 'node:child_process';
-import { existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -205,6 +206,7 @@ const temporal = mkdtempSync(join(tmpdir(), 'og-'));
 const destino = join(raiz, 'public', 'og');
 mkdirSync(destino, { recursive: true });
 
+const versiones = {};
 try {
   for (const [nombre, html] of Object.entries(IMAGENES)) {
     const archivoHtml = join(temporal, `${nombre}.html`);
@@ -228,8 +230,11 @@ try {
       .resize(ANCHO, ALTO, { fit: 'cover', position: 'top' })
       .jpeg({ quality: 86, mozjpeg: true })
       .toFile(salida);
+    versiones[`/og/${nombre}.jpg`] = createHash('md5').update(readFileSync(salida)).digest('hex').slice(0, 8);
     console.log(`✓ public/og/${nombre}.jpg`);
   }
+  // Huella de cada imagen: Base.astro la agrega a la URL como ?v=.
+  writeFileSync(join(raiz, 'src', 'data', 'og-versiones.json'), JSON.stringify(versiones, null, 2) + '\n');
 } finally {
   rmSync(temporal, { recursive: true, force: true });
 }

@@ -163,6 +163,13 @@
   z-index: 2;
   transition: opacity 0.25s ease-out;
 }
+/* En celular las cartas siempre muestran su dibujo: sin fotos de módulos
+   (con display: none el navegador tampoco las descarga). */
+@media (max-width: 767px) {
+  .mz-carta__foto {
+    display: none;
+  }
+}
 .mz-arte {
   width: 96px;
   height: 100px;

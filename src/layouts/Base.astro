@@ -18,8 +18,7 @@ import Cabecera from '../components/Cabecera.astro';
 import Pie from '../components/Pie.astro';
 import AvisoCookies from '../components/AvisoCookies.astro';
 import { sitio, type PaginaId } from '../data/sitio';
-import { createHash } from 'node:crypto';
-import { readFileSync } from 'node:fs';
+import versionesOg from '../data/og-versiones.json';
 
 interface Props {
   titulo: string;
@@ -39,10 +38,11 @@ const colorNavegador = tema === 'mazo' ? '#14184A' : '#FFFFFF';
 // página 404 no tiene dirección propia.
 const ruta = Astro.url.pathname.replace(/(index)?\.html$/, '');
 const canonica = Astro.site && ruta !== '/404' ? new URL(ruta, Astro.site).href : undefined;
-// "?v=" cambia solo cuando cambia la imagen: así WhatsApp y las redes, que
-// guardan la vista previa, descargan la nueva en vez de mostrar la vieja.
-const version = createHash('md5').update(readFileSync(`public${imagenCompartir}`)).digest('hex').slice(0, 8);
-const imagen = new URL(`${imagenCompartir}?v=${version}`, Astro.site ?? Astro.url).href;
+// "?v=" cambia solo cuando cambia la imagen (lo anota `npm run og` en
+// og-versiones.json): así WhatsApp y las redes, que guardan la vista previa,
+// descargan la nueva en vez de mostrar la vieja.
+const version = (versionesOg as Record<string, string>)[imagenCompartir];
+const imagen = new URL(version ? `${imagenCompartir}?v=${version}` : imagenCompartir, Astro.site ?? Astro.url).href;
 ---
 
 <!doctype html>
