@@ -9,7 +9,8 @@
     "preview": "astro preview",
     "check": "astro check",
     "test": "vitest run",
-    "revision": "astro build && astro preview --port 4400"
+    "revision": "astro build && astro preview --port 4400",
+    "og": "node scripts/generar-og.mjs"
   },
   "dependencies": {
     "@astrojs/preact": "^6.0.5",

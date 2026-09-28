@@ -31,7 +31,6 @@ for (const c of CATEGORIAS) {
   fotosCategorias[c.id] = (await Promise.all(c.fotos.map((nombre) => optimizar(nombre)))).filter((f): f is FotoOptimizada => f !== null);
 }
 
-// POR CONFIRMAR: "Emitimos factura".
 const confianza = [
   { texto: 'Te mostramos cómo quedará antes de fabricar', icono: 'escudo' },
   { texto: 'Almacén propio en Lima', icono: 'almacen' },
@@ -54,6 +53,7 @@ const beneficios = [
   descripcion="Polos, tomatodos, peluches y más con el logo de tu empresa. Lo producimos, lo guardamos en nuestro almacén en Lima y lo entregamos en Lima y provincias."
   tema="claro"
   actual="empresas"
+  imagenCompartir="/og/merch-empresas.jpg"
 >
   <BotonCatalogo variante="cabecera" slot="acciones" />
   <BotonCatalogo variante="menu" slot="acciones-movil" />

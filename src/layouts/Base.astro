@@ -25,11 +25,19 @@ interface Props {
   tema: 'claro' | 'mazo';
   actual: PaginaId;
   acento?: string; // color del subrayado del menú en la página actual
+  // Imagen al compartir el enlace (1200×630, en public/og/, se generan con
+  // `npm run og`). Las páginas sin imagen propia usan la de la portada.
+  imagenCompartir?: string;
 }
-const { titulo, descripcion, tema, actual, acento } = Astro.props;
+const { titulo, descripcion, tema, actual, acento, imagenCompartir = '/og/inicio.jpg' } = Astro.props;
 
 const colorNavegador = tema === 'mazo' ? '#14184A' : '#FFFFFF';
-const canonica = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
+// Con build.format 'file' la ruta llega como "/merch-empresas.html" o
+// "/index.html"; Cloudflare las publica sin ".html", así que se quita. La
+// página 404 no tiene dirección propia.
+const ruta = Astro.url.pathname.replace(/(index)?\.html$/, '');
+const canonica = Astro.site && ruta !== '/404' ? new URL(ruta, Astro.site).href : undefined;
+const imagen = new URL(imagenCompartir, Astro.site ?? Astro.url).href;
 ---
 
 <!doctype html>
@@ -49,7 +57,13 @@ const canonica = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : und
     <meta property="og:title" content={titulo} />
     <meta property="og:description" content={descripcion} />
     {canonica && <meta property="og:url" content={canonica} />}
+    <meta property="og:image" content={imagen} />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={titulo} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={imagen} />
   </head>
   <body data-tema={tema} style={acento ? `--acento: ${acento}` : undefined}>
     <Cabecera tema={tema} actual={actual}>
