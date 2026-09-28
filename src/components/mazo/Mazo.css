@@ -486,6 +486,10 @@
   font-weight: 800;
   color: var(--oscuro);
 }
+/* "desde S/ 1,500/mes" no se corta a la mitad: si no entra, baja entero. */
+.mz-item__precio {
+  white-space: nowrap;
+}
 .mz-item__quitar {
   flex-shrink: 0;
   width: 44px;
@@ -624,6 +628,15 @@
   font-family: 'Lilita One', sans-serif;
   font-weight: 400;
   font-size: 30px;
+}
+/* "Desde" chico delante del total, en el panel y en la barra de celular. */
+.mz-desde {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  vertical-align: 0.35em;
 }
 .mz-totales__nota {
   font-size: 12px;

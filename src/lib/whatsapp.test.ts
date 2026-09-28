@@ -79,18 +79,18 @@ describe('mensajeMazo', () => {
     expect(msg).toBe(
       [
         'Hola Laboratorio Digital, quiero cotizar este mazo:',
-        '• Identidad de marca (DISEÑO) S/ 2,500',
-        '• Gestión de redes (MARKETING) S/ 1,500/mes',
-        '• Pack de 4 reels (AUDIOVISUAL) S/ 1,200',
+        '• Identidad de marca (DISEÑO) desde S/ 2,500',
+        '• Gestión de redes (MARKETING) desde S/ 1,500/mes',
+        '• Pack de 4 reels (AUDIOVISUAL) desde S/ 1,200',
         '• Comodín (a cotizar): Grabación con drones',
-        'Total referencial: S/ 4,420 (combo −15%)',
+        'Total referencial: desde S/ 4,420 (combo −15%)',
       ].join('\n'),
     );
   });
 
   it('sin combo no agrega el paréntesis', () => {
     expect(mensajeMazo(resumirMazo(['d1']))).toBe(
-      'Hola Laboratorio Digital, quiero cotizar este mazo:\n• Logotipo (DISEÑO) S/ 900\nTotal referencial: S/ 900',
+      'Hola Laboratorio Digital, quiero cotizar este mazo:\n• Logotipo (DISEÑO) desde S/ 900\nTotal referencial: desde S/ 900',
     );
   });
 

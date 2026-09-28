@@ -51,8 +51,11 @@ export function PanelMazo(p: Props) {
                 <span class="mz-item__texto">
                   <span class="mz-item__nombre">{m.nombre}</span>
                   <span class="mz-item__sub">
-                    {clase.nombre} · {soles(m.precio)}
-                    {m.unidad}
+                    {clase.nombre} ·{' '}
+                    <span class="mz-item__precio">
+                      desde {soles(m.precio)}
+                      {m.unidad}
+                    </span>
                   </span>
                 </span>
                 <button type="button" class="mz-item__quitar" aria-label={`Quitar ${m.nombre}`} onClick={() => p.onQuitarModulo(m.id)}>
@@ -124,7 +127,9 @@ export function PanelMazo(p: Props) {
         </div>
         <div class="mz-totales__total">
           <span>Inversión estimada</span>
-          <strong>{soles(resumen.total)}</strong>
+          <strong>
+            <small class="mz-desde">Desde</small> {soles(resumen.total)}
+          </strong>
         </div>
         <span class="mz-totales__nota">
           Referencial, sin IGV. Los módulos mensuales se suman por el primer mes. La pauta publicitaria se paga aparte.

@@ -232,7 +232,9 @@ export default function Mazo({ imagenes = {} }: { imagenes?: Record<string, Imag
       <div class="mz-barra">
         <div class="mz-barra__total">
           <span class={`mz-barra__etiqueta${resumen.porcentaje ? ' mz-barra__etiqueta--combo' : ''}`}>{combo.barra}</span>
-          <strong>{soles(resumen.total)}</strong>
+          <strong>
+            <small class="mz-desde">Desde</small> {soles(resumen.total)}
+          </strong>
         </div>
         <button type="button" class="mz-barra__boton mz-chunky" aria-haspopup="dialog" aria-expanded={hojaAbierta} onClick={abrirHoja}>
           Ver mi mazo ({cartasEnMazo})

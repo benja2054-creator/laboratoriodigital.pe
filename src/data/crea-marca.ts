@@ -1,6 +1,4 @@
 // Página "Crea tu marca": productos, servicios y la banda de fotos.
-//
-// POR VALIDAR: las características de cada producto.
 // `foto` es el nombre del archivo dentro de src/assets/marca/ (horizontal 3:2);
 // mientras sea null se muestra un recuadro de "FOTO".
 
@@ -16,7 +14,6 @@ export const PRODUCTOS: ProductoMarca[] = [
   { nombre: 'Tazas', caracteristicas: ['Cerámica de 11 y 15 oz', 'Sublimado a full color', 'Aptas para microondas'], foto: 'marca-tazas.jpg' },
   { nombre: 'Mousepads', caracteristicas: ['Normal y XL (90 × 40 cm)', 'Base antideslizante', 'Borde cosido'], foto: 'marca-mousepads.jpg', fotoAncha: 'marca-mousepads-ancha.jpg' },
   { nombre: 'Lanyards', caracteristicas: ['Sublimado a full color', 'Gancho metálico', 'Ideales para eventos'], foto: 'marca-lanyards.jpg' },
-  // Características de acrílicos: propuesta, por validar.
   { nombre: 'Acrílicos', caracteristicas: ['Impresión a full color', 'Corte con la forma de tu diseño', 'Llaveros, pines o stands'], foto: 'marca-acrilicos.jpg' },
   { nombre: 'Peluches', caracteristicas: ['De tus personajes originales', 'Muestra antes de producir', 'Varios tamaños'], foto: 'marca-peluches.jpg', fotoAncha: 'marca-peluches-ancha.jpg' },
 ];

@@ -19,10 +19,10 @@ export const MENSAJE_AGENDAR = 'Hola, quiero agendar una llamada con Laboratorio
 // Se usa mientras el PDF del catálogo no esté publicado.
 export const MENSAJE_CATALOGO = 'Hola, ¿me pueden enviar el catálogo completo de merch para empresas?';
 
-/** Mensaje del mazo: módulos con precio, comodines y total referencial. */
+/** Mensaje del mazo: módulos con precio "desde", comodines y total referencial. */
 export function mensajeMazo(resumen: ResumenMazo): string {
   const lineas = [
-    ...resumen.modulos.map((m) => `• ${m.nombre} (${claseDe(m.clase).nombre}) ${soles(m.precio)}${m.unidad}`),
+    ...resumen.modulos.map((m) => `• ${m.nombre} (${claseDe(m.clase).nombre}) desde ${soles(m.precio)}${m.unidad}`),
     ...resumen.comodines.map((texto) => `• Comodín (a cotizar): ${texto}`),
   ];
   if (lineas.length === 0) return 'Hola Laboratorio Digital, quiero cotizar un servicio.';
@@ -31,7 +31,7 @@ export function mensajeMazo(resumen: ResumenMazo): string {
   // Si solo hay comodines no hay nada que sumar: se omite el total.
   if (resumen.modulos.length > 0) {
     const combo = resumen.porcentaje ? ` (combo −${resumen.porcentaje}%)` : '';
-    partes.push(`Total referencial: ${soles(resumen.total)}${combo}`);
+    partes.push(`Total referencial: desde ${soles(resumen.total)}${combo}`);
   }
   return partes.join('\n');
 }
