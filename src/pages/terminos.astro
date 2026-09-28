@@ -1,0 +1,12 @@
+---
+// Texto legal: se edita en src/legal/terminos.md
+import Base from '../layouts/Base.astro';
+import PaginaLegal from '../components/PaginaLegal.astro';
+import { Content } from '../legal/terminos.md';
+---
+
+<Base titulo="Términos y condiciones · Laboratorio Digital" descripcion="Condiciones de uso del sitio y de contratación de los servicios de diseño, marketing, video y merchandising de Laboratorio Digital." tema="claro" actual="inicio">
+  <PaginaLegal>
+    <Content />
+  </PaginaLegal>
+</Base>

@@ -1,0 +1,98 @@
+---
+// Contenedor de lectura para los textos legales (src/legal/*.md).
+// El título h1 viene dentro del propio Markdown.
+---
+
+<main class="contenedor legal">
+  <article class="legal__texto">
+    <slot />
+  </article>
+</main>
+
+<style>
+  .legal {
+    padding-block: 56px 80px;
+  }
+  .legal__texto {
+    max-width: 760px;
+    margin-inline: auto;
+    font-size: 17px;
+    line-height: 1.65;
+    color: #2a2a2a;
+  }
+  .legal__texto :global(h1) {
+    font-weight: 900;
+    font-size: clamp(32px, 4vw, 44px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: #141414;
+    margin-bottom: 12px;
+  }
+  .legal__texto :global(h1 + p) {
+    color: #6b6b6b;
+    font-size: 15px;
+  }
+  .legal__texto :global(h2) {
+    font-weight: 800;
+    font-size: 22px;
+    line-height: 1.25;
+    color: #141414;
+    margin: 40px 0 12px;
+    padding-top: 20px;
+    border-top: 1px solid var(--linea);
+  }
+  .legal__texto :global(p) {
+    margin: 0 0 14px;
+  }
+  .legal__texto :global(ul),
+  .legal__texto :global(ol) {
+    margin: 0 0 16px;
+    padding-left: 24px;
+  }
+  .legal__texto :global(li) {
+    margin-bottom: 6px;
+  }
+  .legal__texto :global(strong) {
+    font-weight: 800;
+    color: #141414;
+  }
+  .legal__texto :global(a) {
+    color: #0f7a44;
+    font-weight: 700;
+    text-underline-offset: 3px;
+  }
+  .legal__texto :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0 20px;
+    font-size: 16px;
+  }
+  .legal__texto :global(th),
+  .legal__texto :global(td) {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--linea);
+  }
+  .legal__texto :global(th) {
+    background: var(--gris);
+    font-weight: 800;
+    color: #141414;
+  }
+  @media (max-width: 639px) {
+    .legal {
+      padding-block: 32px 48px;
+    }
+    .legal__texto {
+      font-size: 16px;
+    }
+    .legal__texto :global(h2) {
+      font-size: 19px;
+      margin-top: 32px;
+    }
+    .legal__texto :global(th),
+    .legal__texto :global(td) {
+      padding: 8px;
+      font-size: 14px;
+    }
+  }
+</style>

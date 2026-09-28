@@ -31,6 +31,8 @@ El encargo original está en `LEEME-CLAUDE-CODE.md` y los diseños de referencia
 | Categorías y servicios de merch | `src/data/merch.ts` |
 | Productos, servicios y banda de Crea tu marca | `src/data/crea-marca.ts` |
 | Textos de los mensajes de WhatsApp | `src/lib/whatsapp.ts` |
+| Términos y condiciones, Política de privacidad | `src/legal/terminos.md`, `src/legal/privacidad.md` |
+| ID de Google Analytics (solo se activa si el visitante acepta cookies) | `googleAnalyticsId` en `src/data/sitio.ts` |
 
 Los datos pendientes (`null` en `sitio.ts`) se ven con un borde punteado rojo en
 `npm run dev` y **no aparecen** en el sitio publicado hasta que se completen.

@@ -46,3 +46,8 @@ export const legales = [
   { nombre: 'Términos y condiciones', ruta: '/terminos' },
   { nombre: 'Política de privacidad', ruta: '/privacidad' },
 ] as const;
+
+// Google Analytics 4. Pendiente: el ID de medición (empieza con "G-", se ve
+// en Analytics → Administrar → Flujos de datos). Solo se carga si el
+// visitante acepta las cookies de analítica en el aviso de cookies.
+export const googleAnalyticsId: string | null = null;

@@ -16,6 +16,7 @@ import '../styles/global.css';
 
 import Cabecera from '../components/Cabecera.astro';
 import Pie from '../components/Pie.astro';
+import AvisoCookies from '../components/AvisoCookies.astro';
 import { sitio, type PaginaId } from '../data/sitio';
 
 interface Props {
@@ -57,5 +58,6 @@ const canonica = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : und
     </Cabecera>
     <slot />
     <Pie />
+    <AvisoCookies />
   </body>
 </html>

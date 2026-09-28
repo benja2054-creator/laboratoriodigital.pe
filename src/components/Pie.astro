@@ -87,6 +87,7 @@ const redes = sitio.redes.filter((r) => r.url || verPendientes);
       </span>
       <span class="pie__legales">
         {legales.map((l) => <a href={l.ruta}>{l.nombre}</a>)}
+        <a href="/privacidad#9-cookies-y-analítica" data-abrir-cookies>Preferencias de cookies</a>
       </span>
     </div>
   </div>
@@ -238,7 +239,8 @@ const redes = sitio.redes.filter((r) => r.url || verPendientes);
   }
   .pie__legales {
     display: flex;
-    gap: 24px;
+    flex-wrap: wrap;
+    gap: 8px 24px;
   }
   .pie__legales a {
     color: var(--pie-suave);
