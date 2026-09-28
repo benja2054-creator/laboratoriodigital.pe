@@ -1,0 +1,63 @@
+---
+// Título en globo negro con "colita", usado en las secciones de Crea tu marca.
+interface Props {
+  id: string;
+  centrado?: boolean; // en escritorio: globo centrado y colita al medio
+}
+const { id, centrado = false } = Astro.props;
+---
+
+<div class:list={['burbuja', { 'burbuja--centrada': centrado }]}>
+  <h2 id={id}><slot /></h2>
+  <svg class="burbuja__cola" width="26" height="18" viewBox="0 0 26 18" aria-hidden="true">
+    <path d="M0 0h26L6 18z" fill="#141414"></path>
+  </svg>
+</div>
+
+<style>
+  .burbuja {
+    position: relative;
+    align-self: flex-start;
+  }
+  h2 {
+    background: #141414;
+    color: #ffffff;
+    border-radius: 22px;
+    padding: 20px 30px 22px;
+    font-weight: 900;
+    font-size: 44px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+  .burbuja__cola {
+    position: absolute;
+    left: 36px;
+    bottom: -16px;
+  }
+  .burbuja--centrada {
+    align-self: center;
+  }
+  .burbuja--centrada .burbuja__cola {
+    left: calc(50% - 12px);
+  }
+
+  @media (max-width: 1099px) {
+    h2 {
+      font-size: 34px;
+      padding: 16px 22px 18px;
+    }
+  }
+
+  @media (max-width: 639px) {
+    .burbuja--centrada {
+      align-self: flex-start;
+    }
+    .burbuja--centrada .burbuja__cola {
+      left: 36px;
+    }
+    h2 {
+      font-size: 24px;
+      padding: 12px 16px 14px;
+    }
+  }
+</style>

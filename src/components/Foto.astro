@@ -1,0 +1,76 @@
+---
+// Foto con recuadro provisional: mientras `src` sea null se muestra un
+// recuadro rayado con la etiqueta (p. ej. "FOTO · TAZAS").
+// Ocupa todo su contenedor: el alto y las esquinas los define quien la usa.
+interface Props {
+  src: string | null;
+  alt: string;
+  etiqueta?: string;
+  fondo?: string; // color del recuadro provisional
+  prioridad?: boolean; // true para la foto principal (se carga de inmediato)
+  srcset?: string; // versiones optimizadas (ver getImage en la página)
+  sizes?: string;
+  posicion?: string; // encuadre cuando la foto se recorta, p. ej. '50% 78%'
+  srcsetAncho?: string; // versión alternativa para pantallas anchas (≥1400 px)
+}
+const { src, alt, etiqueta = 'FOTO', fondo = '#F1F1EF', prioridad = false, srcset, sizes, posicion, srcsetAncho } = Astro.props;
+---
+
+{
+  src && srcsetAncho ? (
+    <picture>
+      <source media="(min-width: 1400px)" srcset={srcsetAncho} sizes={sizes} />
+      <img
+        class="foto"
+        src={src}
+        srcset={srcset}
+        sizes={sizes}
+        style={posicion ? `object-position: ${posicion}` : undefined}
+        alt={alt}
+        loading={prioridad ? 'eager' : 'lazy'}
+        decoding="async"
+      />
+    </picture>
+  ) : src ? (
+    <img
+      class="foto"
+      src={src}
+      srcset={srcset}
+      sizes={sizes}
+      style={posicion ? `object-position: ${posicion}` : undefined}
+      alt={alt}
+      loading={prioridad ? 'eager' : 'lazy'}
+      decoding="async"
+      fetchpriority={prioridad ? 'high' : undefined}
+    />
+  ) : (
+    <div class="foto foto--pendiente" style={`background-color: ${fondo}`} role="img" aria-label={alt}>
+      <span aria-hidden="true">{etiqueta}</span>
+    </div>
+  )
+}
+
+<style>
+  picture {
+    display: contents;
+  }
+  .foto {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+  }
+  .foto--pendiente {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    background-image: repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.04) 0 12px, transparent 12px 24px);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.45);
+  }
+</style>

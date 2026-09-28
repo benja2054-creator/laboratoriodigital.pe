@@ -1,0 +1,329 @@
+---
+// Pie de página compartido. Los colores salen del tema de la página.
+// Los datos pendientes (correo, redes) se ven como marcadores mientras se
+// desarrolla (`npm run dev`) y se ocultan en el sitio publicado.
+import { legales, paginas, sitio } from '../data/sitio';
+import { enlaceWhatsApp } from '../lib/whatsapp';
+import Matraz from './Matraz.astro';
+import IconoWhatsApp from './IconoWhatsApp.astro';
+
+const verPendientes = import.meta.env.DEV;
+const redes = sitio.redes.filter((r) => r.url || verPendientes);
+---
+
+<footer class="pie">
+  <div class="pie__contenido">
+    <div class="pie__columnas">
+      <div class="pie__marca">
+        <div class="pie__logo">
+          <span class="pie__logo-icono"><Matraz tamano={22} /></span>
+          <span class="pie__logo-nombre">Laboratorio<br />Digital</span>
+        </div>
+        <p class="pie__descripcion">{sitio.descripcion}</p>
+        {
+          redes.length > 0 && (
+            <ul class="pie__redes" aria-label="Redes sociales">
+              {redes.map((r) => (
+                <li>
+                  {r.url ? (
+                    <a href={r.url} aria-label={r.nombre} rel="noopener" target="_blank">
+                      {r.etiqueta}
+                    </a>
+                  ) : (
+                    <span class="pendiente" title={`${r.nombre}: pendiente`}>
+                      {r.etiqueta}
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          )
+        }
+      </div>
+
+      <nav class="pie__grupo" aria-label="Servicios">
+        <span class="pie__titulo">SERVICIOS</span>
+        {paginas.map((p) => <a href={p.ruta}>{p.nombre}</a>)}
+      </nav>
+
+      <div class="pie__grupo">
+        <span class="pie__titulo">CONTACTO</span>
+        <a href={enlaceWhatsApp()} class="pie__dato">
+          <span class="pie__dato-icono"><IconoWhatsApp tamano={18} /></span>
+          {sitio.whatsapp.visible}
+        </a>
+        {
+          sitio.correo ? (
+            <a href={`mailto:${sitio.correo}`} class="pie__dato">
+              <span class="pie__dato-icono">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="M3 7l9 6 9-6" /></svg>
+              </span>
+              {sitio.correo}
+            </a>
+          ) : (
+            verPendientes && (
+              <span class="pie__dato pendiente">
+                <span class="pie__dato-icono">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="M3 7l9 6 9-6" /></svg>
+                </span>
+                [correo de contacto]
+              </span>
+            )
+          )
+        }
+        <span class="pie__dato">
+          <span class="pie__dato-icono">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z" /><circle cx="12" cy="9.5" r="2.5" /></svg>
+          </span>
+          {sitio.ciudad}
+        </span>
+      </div>
+    </div>
+
+    <div class="pie__base">
+      <span>
+        © {sitio.anio} {sitio.razonSocial}<span class="pie__corte"> · </span>RUC {sitio.ruc} · Todos los derechos
+        reservados.
+      </span>
+      <span class="pie__legales">
+        {legales.map((l) => <a href={l.ruta}>{l.nombre}</a>)}
+      </span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .pie {
+    margin-top: auto;
+    background: var(--pie-fondo);
+    color: var(--pie-texto);
+  }
+
+  .pie__contenido {
+    max-width: var(--ancho-max);
+    margin-inline: auto;
+    padding: 32px 56px 0;
+  }
+
+  .pie__columnas {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 40px;
+    padding-bottom: 28px;
+  }
+
+  /* Escritorio: redes a la derecha del logo, descripción debajo.
+     Celular: logo, descripción y redes en columna (como el diseño). */
+  .pie__marca {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      'logo redes'
+      'desc desc';
+    align-items: center;
+    column-gap: 24px;
+    row-gap: 10px;
+  }
+  .pie__logo {
+    grid-area: logo;
+  }
+  .pie__descripcion {
+    grid-area: desc;
+  }
+  .pie__redes {
+    grid-area: redes;
+  }
+
+  .pie__logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .pie__logo-icono {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: var(--pie-logo-fondo);
+    color: var(--pie-logo-texto);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .pie__logo-nombre {
+    font-family: var(--fuente-marca);
+    font-weight: 900;
+    font-size: 22px;
+    line-height: 1.05;
+  }
+  :global([data-tema='mazo']) .pie__logo-nombre {
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+
+  .pie__descripcion {
+    max-width: 440px;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--pie-suave);
+  }
+
+  .pie__redes {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    gap: 10px;
+  }
+  .pie__redes a,
+  .pie__redes span {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--pie-circulo);
+    color: var(--pie-texto);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 900;
+    text-decoration: none;
+  }
+
+  .pie__grupo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 9px;
+  }
+
+  .pie__titulo {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: var(--pie-suave);
+  }
+
+  .pie__grupo a,
+  .pie__dato {
+    color: var(--pie-texto);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .pie__grupo a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .pie__dato {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .pie__dato-icono {
+    color: var(--pie-suave);
+    display: flex;
+  }
+
+  .pie__base {
+    border-top: 1px solid var(--pie-linea);
+    padding: 14px 0 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--pie-suave);
+  }
+  .pie__legales {
+    display: flex;
+    gap: 24px;
+  }
+  .pie__legales a {
+    color: var(--pie-suave);
+  }
+
+  /* Marcador de dato pendiente: solo se ve en desarrollo. */
+  .pendiente {
+    outline: 2px dashed #ff5a36;
+    outline-offset: 2px;
+  }
+
+  @media (max-width: 1023px) {
+    .pie__columnas {
+      grid-template-columns: 1fr 1fr;
+    }
+    .pie__marca {
+      grid-column: 1 / -1;
+    }
+    .pie__base {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  @media (max-width: 639px) {
+    .pie__contenido {
+      padding: 32px 20px 20px;
+    }
+    .pie__columnas {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      padding-bottom: 24px;
+    }
+    .pie__marca {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        'logo'
+        'desc'
+        'redes';
+      row-gap: 12px;
+    }
+    .pie__logo-icono {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+    }
+    .pie__logo-nombre {
+      font-size: 18px;
+    }
+    .pie__descripcion {
+      font-size: 14px;
+    }
+    .pie__grupo {
+      gap: 0;
+    }
+    .pie__titulo {
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+    .pie__grupo a,
+    .pie__dato {
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      font-size: 15px;
+    }
+    .pie__base {
+      padding: 16px 0 0;
+      gap: 8px;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    /* En celular la razón social y el RUC van en dos líneas, como en el diseño. */
+    .pie__corte {
+      display: block;
+      height: 0;
+      overflow: hidden;
+    }
+    .pie__legales {
+      gap: 16px;
+    }
+    .pie__legales a {
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+    }
+  }
+</style>

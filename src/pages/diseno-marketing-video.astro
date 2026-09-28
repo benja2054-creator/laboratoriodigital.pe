@@ -1,0 +1,305 @@
+---
+// Landing "Diseño, marketing y video" (mazo de cartas). Diseño:
+// diseno/MainV3.dc.html (escritorio) y diseno/MobileV3.dc.html (celular).
+// Datos y precios: src/data/mazo.ts.
+import Base from '../layouts/Base.astro';
+import Mazo from '../components/mazo/Mazo.tsx';
+import { getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { MODULOS } from '../data/mazo';
+
+// Imágenes de los módulos: src/assets/mazo/mazo-d01.jpg … mazo-a06.jpg (16:10).
+// Las que falten se ven como recuadro provisional.
+const archivos = import.meta.glob<{ default: ImageMetadata }>('../assets/mazo/*.{jpg,jpeg,png,webp}', { eager: true });
+const imagenes: Record<string, { src: string; srcset: string }> = {};
+for (const m of MODULOS) {
+  const base = `mazo-${m.id[0]}${m.id.slice(1).padStart(2, '0')}`; // d1 → mazo-d01
+  const clave = Object.keys(archivos).find((k) => k.split('/').pop()?.replace(/\.[^.]+$/, '') === base);
+  if (!clave) continue;
+  const img = await getImage({ src: archivos[clave].default, widths: [480, 800, 1200], format: 'webp', quality: 80 });
+  imagenes[m.id] = { src: img.src, srcset: img.srcSet.attribute };
+}
+---
+
+<Base
+  titulo="Diseño, marketing y video: arma tu mazo · Laboratorio Digital"
+  descripcion="Elige módulos de diseño, marketing y audiovisual, arma tu mazo y mira al instante una inversión referencial. Combina disciplinas y activa descuentos por combo."
+  tema="mazo"
+  actual="estudio"
+>
+  <main class="mazo">
+    <section class="mazo__intro">
+      <div class="mazo__titulo">
+        <span class="mazo__etiqueta">DISEÑO / MARKETING / AUDIOVISUAL</span>
+        <h1>Elige tus cartas. <br />Arma tu mazo.</h1>
+        <p>
+          <span class="solo-escritorio">Tres disciplinas, módulos independientes. </span>Juega una sola carta o combínalas y activa
+          bonus por combo.
+        </p>
+      </div>
+      <ol class="mazo__pasos">
+        <li><span>1</span>Elige un servicio</li>
+        <li><span>2</span>Suma tus módulos</li>
+        <li><span>3</span>Envía tu mazo</li>
+      </ol>
+    </section>
+
+    <Mazo client:load imagenes={imagenes} />
+  </main>
+</Base>
+
+<style>
+  /* Grilla: a la izquierda intro, cartas y módulos; a la derecha el panel
+     "Tu mazo" (solo escritorio). Las secciones del componente Mazo caen
+     directo en estas áreas. */
+  .mazo {
+    width: 100%;
+    max-width: var(--ancho-max);
+    margin-inline: auto;
+    padding: 36px 64px 64px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    grid-template-areas:
+      'intro panel'
+      'cartas panel'
+      'modulos panel';
+    grid-template-rows: auto auto 1fr;
+    column-gap: 40px;
+    row-gap: 36px;
+  }
+  .mazo__intro {
+    grid-area: intro;
+  }
+  .mazo :global(.mz-area-cartas) {
+    grid-area: cartas;
+  }
+  .mazo :global(.mz-area-modulos) {
+    grid-area: modulos;
+  }
+  .mazo :global(.mz-area-panel) {
+    grid-area: panel;
+    align-self: start;
+    position: sticky;
+    top: 24px;
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
+    padding-bottom: 12px; /* deja ver la sombra del panel */
+    scrollbar-width: thin;
+  }
+
+  .mazo__intro {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 32px;
+  }
+  .mazo__titulo {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .mazo__etiqueta {
+    align-self: flex-start;
+    font-weight: 900;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    color: #0b0e33;
+    background: #fff8e7;
+    padding: 6px 12px;
+    border-radius: 8px;
+  }
+  .mazo h1 {
+    font-family: 'Lilita One', sans-serif;
+    font-weight: 400;
+    font-size: 60px;
+    line-height: 1;
+    letter-spacing: 0.01em;
+    text-shadow: 0 5px 0 #ff5a36;
+  }
+  .mazo__titulo p {
+    max-width: 520px;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.5;
+    color: #d6d9ff;
+  }
+  .mazo__pasos {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 230px;
+    font-size: 15px;
+    font-weight: 700;
+  }
+  .mazo__pasos li {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  .mazo__pasos span {
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    /* Color neutro (no el de las cartas): los pasos no son las cartas. */
+    background: #fff8e7;
+    color: #0b0e33;
+    border: 2px solid #0b0e33;
+    font-family: 'Lilita One', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Escritorio angosto: panel más angosto y título más chico. */
+  @media (min-width: 1200px) and (max-width: 1399px) {
+    .mazo {
+      padding: 32px 40px 56px;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      column-gap: 28px;
+    }
+  }
+
+  /* Escritorio: las cartas mantienen su tamaño original; para que entren
+     con los 6 módulos se sube todo: menos espacio arriba y entre bloques, y
+     el título en una sola línea. */
+  @media (min-width: 1200px) {
+    .mazo {
+      padding-top: 16px;
+      row-gap: 24px;
+    }
+    .mazo__titulo {
+      gap: 10px;
+    }
+    .mazo h1 {
+      font-size: clamp(40px, 3.6vw, 56px);
+      text-shadow: 0 4px 0 #ff5a36;
+    }
+    .mazo h1 br {
+      display: none;
+    }
+    .mazo__titulo p {
+      max-width: none;
+    }
+    /* Arriba la etiqueta y los 3 pasos en una fila; debajo el título y el
+       texto, cada uno en una sola línea. */
+    .mazo__intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-areas:
+        'etiqueta pasos'
+        'titulo titulo'
+        'texto texto';
+      align-items: center;
+      column-gap: 24px;
+      row-gap: 10px;
+    }
+    .mazo__titulo {
+      display: contents;
+    }
+    .mazo__etiqueta {
+      grid-area: etiqueta;
+      justify-self: start;
+    }
+    .mazo h1 {
+      grid-area: titulo;
+    }
+    .mazo__titulo p {
+      grid-area: texto;
+    }
+    .mazo__pasos {
+      grid-area: pasos;
+      flex-direction: row;
+      gap: 18px;
+      min-width: 0;
+      padding-bottom: 2px;
+    }
+  }
+  /* Pantallas de menos de 1215 px de alto (1080p y laptops): cabecera más
+     baja y fuera la etiqueta y los 3 pasos (son decorativos). Así las cartas
+     pueden quedar más grandes; si aun así falta alto, se achican en
+     proporción (ver Mazo.css). */
+  @media (min-width: 1200px) and (max-height: 1214px) {
+    :global(body[data-tema='mazo']) {
+      --cabecera-alto: 72px;
+    }
+    /* Los 3 pasos se mantienen, en la misma fila que el texto. */
+    .mazo__intro {
+      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-areas:
+        'titulo titulo'
+        'texto pasos';
+      align-items: center;
+      row-gap: 6px;
+    }
+    .mazo__etiqueta {
+      display: none;
+    }
+    .mazo__pasos {
+      gap: 16px;
+      font-size: 14px;
+    }
+    .mazo__pasos span {
+      width: 26px;
+      height: 26px;
+      font-size: 14px;
+    }
+  }
+  @media (min-width: 1200px) and (max-height: 680px) {
+    .mazo {
+      padding-top: 8px;
+      row-gap: 10px;
+    }
+    .mazo__titulo p {
+      display: none;
+    }
+  }
+
+  /* Tablet: una sola columna; el mazo va en la hoja inferior. */
+  @media (max-width: 1199px) {
+    .mazo {
+      padding: 32px 40px 48px;
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-areas:
+        'intro'
+        'cartas'
+        'modulos';
+      grid-template-rows: auto;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .mazo {
+      padding: 18px 20px 32px;
+      row-gap: 14px;
+    }
+    .solo-escritorio {
+      display: none;
+    }
+    .mazo__intro {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .mazo__titulo {
+      gap: 12px;
+    }
+    .mazo__etiqueta {
+      font-size: 11px;
+      padding: 5px 10px;
+    }
+    .mazo h1 {
+      font-size: 38px;
+      letter-spacing: 0;
+      text-shadow: 0 4px 0 #ff5a36;
+    }
+    .mazo__titulo p {
+      font-size: 15px;
+    }
+    .mazo__pasos {
+      display: none;
+    }
+  }
+</style>

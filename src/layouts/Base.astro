@@ -1,0 +1,61 @@
+---
+// Layout de todas las páginas: <head> con SEO, cabecera y pie compartidos.
+// Las fuentes se declaran todas aquí; el navegador solo descarga las que la
+// página realmente usa.
+import '@fontsource/figtree/500.css';
+import '@fontsource/figtree/600.css';
+import '@fontsource/figtree/700.css';
+import '@fontsource/figtree/800.css';
+import '@fontsource/figtree/900.css';
+import '@fontsource/nunito/600.css';
+import '@fontsource/nunito/700.css';
+import '@fontsource/nunito/800.css';
+import '@fontsource/nunito/900.css';
+import '@fontsource/lilita-one/400.css';
+import '../styles/global.css';
+
+import Cabecera from '../components/Cabecera.astro';
+import Pie from '../components/Pie.astro';
+import { sitio, type PaginaId } from '../data/sitio';
+
+interface Props {
+  titulo: string;
+  descripcion: string;
+  tema: 'claro' | 'mazo';
+  actual: PaginaId;
+  acento?: string; // color del subrayado del menú en la página actual
+}
+const { titulo, descripcion, tema, actual, acento } = Astro.props;
+
+const colorNavegador = tema === 'mazo' ? '#14184A' : '#FFFFFF';
+const canonica = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{titulo}</title>
+    <meta name="description" content={descripcion} />
+    <meta name="theme-color" content={colorNavegador} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    {canonica && <link rel="canonical" href={canonica} />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_PE" />
+    <meta property="og:site_name" content={sitio.marca} />
+    <meta property="og:title" content={titulo} />
+    <meta property="og:description" content={descripcion} />
+    {canonica && <meta property="og:url" content={canonica} />}
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body data-tema={tema} style={acento ? `--acento: ${acento}` : undefined}>
+    <Cabecera tema={tema} actual={actual}>
+      <slot name="acciones" slot="acciones" />
+      <slot name="acciones-movil" slot="acciones-movil" />
+    </Cabecera>
+    <slot />
+    <Pie />
+  </body>
+</html>

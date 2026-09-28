@@ -1,0 +1,555 @@
+/* Estilos del selector de merch (SelectorMerch.tsx). Prefijo sm- para no
+   chocar con otras páginas. */
+
+.sm-catalogo,
+.sm-servicios {
+  scroll-margin-top: 24px;
+}
+
+.sm-catalogo ul,
+.sm-servicios ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ---------- Catálogo ---------- */
+.sm-catalogo {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.sm-catalogo__cabeza {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
+.sm-catalogo__cabeza h2 {
+  font-weight: 800;
+  font-size: 44px;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+.sm-catalogo__cabeza p {
+  font-size: 19px;
+  font-weight: 600;
+  color: #3a3a3a;
+}
+
+.sm-categorias {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 32px 28px;
+}
+/* Escritorio: el catálogo completo (título, 8 categorías y la fila
+   "Siguiente") entra en una sola vista; las tarjetas se ajustan al alto. */
+@media (min-width: 1100px) {
+  .sm-categorias {
+    width: 100%;
+    max-width: max(820px, calc(200svh - 690px));
+    margin-inline: auto;
+    gap: 24px 28px;
+  }
+  .sm-categorias .sm-categoria__nombre {
+    font-size: clamp(16px, 1.9svh, 20px);
+  }
+  .sm-catalogo__pie {
+    margin-top: 8px;
+  }
+}
+
+.sm-categoria {
+  width: 100%;
+  padding: 0;
+  border: none;
+  border-radius: 18px;
+  background: transparent;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: box-shadow 0.15s;
+}
+.sm-categoria:hover {
+  box-shadow: 0 10px 24px -14px rgba(0, 0, 0, 0.35);
+}
+
+.sm-categoria__foto {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 16px;
+  border: 3px solid transparent;
+  overflow: hidden;
+  background: #f2f2f0;
+  transition: border-color 0.15s;
+}
+.sm-categoria--activa .sm-categoria__foto {
+  border-color: #0f7a44;
+}
+.sm-categoria__imagen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sm-foto-pendiente {
+  background-image: repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.035) 0 12px, transparent 12px 24px);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: #8a8a8a;
+  text-align: center;
+  padding: 12px;
+}
+
+.sm-casilla {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  border: 2px solid #8a8a8a;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sm-casilla svg {
+  width: 16px;
+  height: 16px;
+}
+.sm-categoria--activa .sm-casilla,
+.sm-servicio--activo .sm-casilla {
+  border-color: #0f7a44;
+  background: #0f7a44;
+}
+
+.sm-categoria__nombre {
+  padding: 0 2px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #141414;
+}
+
+.sm-catalogo__pie {
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+.sm-contador {
+  font-size: 17px;
+  font-weight: 800;
+}
+.sm-limpiar {
+  min-height: 44px;
+  padding: 0 10px;
+  border: none;
+  background: transparent;
+  color: #3a3a3a;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: underline;
+}
+.sm-siguiente {
+  min-height: 52px;
+  padding: 0 26px;
+  border-radius: 12px;
+  background: #141414;
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 17px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+.sm-siguiente:hover {
+  background: #2e2e2e;
+  color: #ffffff;
+}
+
+/* Ilustración de servicios (vertical en computadora, horizontal en tablet y
+   celular): el fondo del recuadro es el mismo crema de la ilustración. */
+.sm-servicios__foto:has(.sm-servicios__imagen--ilustracion) {
+  background: #f0e5d5;
+}
+.sm-servicios__foto picture {
+  display: contents;
+}
+
+/* Segunda foto (p. ej. Polos): aparece al pasar el mouse o con el foco. */
+.sm-categoria__imagen--alterna {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.sm-categoria:hover .sm-categoria__imagen--alterna,
+.sm-categoria:focus-visible .sm-categoria__imagen--alterna {
+  opacity: 1;
+}
+
+/* ---------- Servicios ---------- */
+.sm-servicios {
+  display: flex;
+  min-height: 620px;
+  border-radius: 22px;
+  overflow: hidden;
+}
+.sm-servicios__foto {
+  width: 50%;
+  flex-shrink: 0;
+  background: #f2f2f0;
+}
+.sm-servicios__imagen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+}
+.sm-servicios__panel {
+  flex-grow: 1;
+  background: #cfe4da;
+  padding: 48px 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 18px;
+}
+.sm-servicios__panel h2 {
+  font-weight: 800;
+  font-size: 38px;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+.sm-servicios__panel h2:focus {
+  outline: none;
+}
+.sm-servicios__intro {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.45;
+  color: #2a2a2a;
+}
+
+.sm-lista-servicios {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.sm-servicio {
+  width: 100%;
+  min-height: 72px;
+  padding: 12px 16px;
+  border-radius: 14px;
+  border: 2px solid transparent;
+  background: rgba(255, 255, 255, 0.55);
+  color: #141414;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.sm-servicio--activo {
+  background: #ffffff;
+  border-color: #141414;
+}
+.sm-servicio[aria-disabled='true'] {
+  cursor: default;
+}
+.sm-casilla--chica {
+  position: static;
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+}
+.sm-casilla--chica svg {
+  width: 14px;
+  height: 14px;
+}
+.sm-servicio__texto {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.sm-servicio__nombre {
+  font-size: 18px;
+  font-weight: 800;
+}
+.sm-servicio__desc {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #3a3a3a;
+}
+.sm-servicio__etiqueta {
+  flex-shrink: 0;
+  font-size: 12px;
+  font-weight: 800;
+  color: #0f7a44;
+}
+
+.sm-mensaje {
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.7);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.sm-mensaje__titulo {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #3a3a3a;
+}
+.sm-mensaje__texto {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.sm-asesor {
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 2px solid #141414;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.sm-asesor__icono {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #f2f2f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sm-asesor__texto {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+.sm-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.sm-chips li {
+  font-size: 13px;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: #f2f2f0;
+  border: 1px solid #d6d6d6;
+}
+
+.sm-boton-wa {
+  align-self: flex-start;
+  min-height: 60px;
+  padding: 0 30px;
+  border-radius: 14px;
+  background: var(--verde-wa);
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 19px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: background-color 0.15s;
+}
+.sm-boton-wa:hover {
+  background: var(--verde-wa-hover);
+  color: #ffffff;
+}
+
+/* ---------- Barra fija (solo celular) ---------- */
+.sm-barra {
+  display: none;
+}
+
+/* ---------- Tablet ---------- */
+@media (max-width: 1099px) {
+  .sm-categorias {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px 16px;
+  }
+  .sm-servicios {
+    flex-direction: column;
+  }
+  .sm-servicios__foto {
+    width: 100%;
+    height: 280px;
+  }
+  .sm-servicios__panel {
+    padding: 36px 32px;
+  }
+}
+
+/* ---------- Celular ---------- */
+@media (max-width: 767px) {
+  .sm-solo-sin-barra,
+  .sm-catalogo__pie {
+    display: none;
+  }
+
+  .sm-barra {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 20;
+    padding: 10px 16px calc(18px + env(safe-area-inset-bottom));
+    background: #ffffff;
+    border-top: 1px solid #e6e6e6;
+  }
+  .sm-barra__paso {
+    font-size: 13px;
+    font-weight: 800;
+    color: #3a3a3a;
+    text-align: center;
+  }
+  .sm-barra__boton {
+    min-height: 54px;
+    border-radius: 14px;
+    background: var(--verde-wa);
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 17px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .sm-barra__boton:hover {
+    color: #ffffff;
+  }
+  .sm-barra__boton--negro {
+    background: #141414;
+  }
+  /* Espacio para que la barra fija no tape el final del pie. */
+  body:has(.sm-barra) {
+    padding-bottom: calc(96px + env(safe-area-inset-bottom));
+  }
+}
+
+@media (max-width: 639px) {
+  .sm-solo-escritorio {
+    display: none;
+  }
+  .sm-catalogo {
+    gap: 16px;
+  }
+  .sm-catalogo__cabeza {
+    align-items: flex-start;
+    text-align: left;
+    gap: 6px;
+  }
+  .sm-catalogo__cabeza h2 {
+    font-size: 28px;
+    letter-spacing: -0.01em;
+  }
+  .sm-catalogo__cabeza p {
+    font-size: 15px;
+  }
+  .sm-categorias {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px 12px;
+  }
+  .sm-categoria {
+    gap: 8px;
+  }
+  .sm-casilla {
+    top: 10px;
+    right: 10px;
+    width: 26px;
+    height: 26px;
+  }
+  .sm-casilla svg {
+    width: 14px;
+    height: 14px;
+  }
+  .sm-categoria__nombre {
+    font-size: 15px;
+  }
+  .sm-foto-pendiente {
+    font-size: 10px;
+  }
+
+  .sm-servicios {
+    border-radius: 20px;
+  }
+  .sm-servicios__foto {
+    height: 160px;
+  }
+  .sm-servicios__imagen {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+  }
+  .sm-servicios__panel {
+    padding: 20px 16px;
+    gap: 12px;
+  }
+  .sm-servicios__panel h2 {
+    font-size: 26px;
+  }
+  .sm-servicios__intro {
+    font-size: 14px;
+  }
+  .sm-servicio {
+    padding: 10px 12px;
+  }
+  .sm-servicio__nombre {
+    font-size: 16px;
+  }
+  .sm-servicio__desc {
+    font-size: 13px;
+  }
+  .sm-mensaje,
+  .sm-asesor {
+    padding: 12px;
+  }
+  .sm-mensaje__titulo {
+    font-size: 11px;
+  }
+  .sm-mensaje__texto,
+  .sm-asesor__texto {
+    font-size: 14px;
+  }
+  .sm-chips li {
+    font-size: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sm-categoria,
+  .sm-categoria__foto {
+    transition: none;
+  }
+}

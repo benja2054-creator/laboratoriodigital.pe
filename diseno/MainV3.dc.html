@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Laboratorio Digital · Arma tu mazo v3</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&amp;family=Nunito:wght@600;700;800;900&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#14184A;font-family:'Nunito',system-ui,sans-serif;color:#FFF8E7}
+a{color:#FFC928}a:hover{color:#FFE27A}
+.mat{background-color:#14184A;background-image:radial-gradient(rgba(255,255,255,.08) 1.5px,transparent 1.5px),radial-gradient(circle at 20% 0%,rgba(139,92,246,.35),transparent 45%),radial-gradient(circle at 90% 30%,rgba(255,90,54,.22),transparent 40%);background-size:22px 22px,100% 100%,100% 100%}
+.holo{position:relative;overflow:hidden;transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s;cursor:pointer}
+.holo:hover{transform:perspective(900px) rotateX(5deg) rotateY(-7deg) translateY(-8px)}
+.holo::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 28%,rgba(255,255,255,.35) 44%,rgba(140,220,255,.28) 50%,rgba(255,160,240,.25) 56%,transparent 70%);background-size:250% 250%;background-position:100% 0;mix-blend-mode:overlay;transition:background-position .8s;pointer-events:none}
+.holo:hover::after{background-position:0 100%}
+.chunky{transition:transform .12s,box-shadow .12s}
+.chunky:active{transform:translateY(3px)}
+.mod{transition:transform .2s}
+.mod:hover{transform:translateY(-3px) rotate(-.4deg)}
+button:focus-visible,a:focus-visible{outline:3px solid #FFC928;outline-offset:3px}
+@media (prefers-reduced-motion: reduce){.holo,.holo::after,.mod,.chunky{transition:none}.holo:hover,.mod:hover{transform:none}}
+</style>
+</helmet>
+<div class="mat" style="width: 1440px; height: 1888px; box-sizing: border-box; color: #FFF8E7; display: flex; flex-direction: column">
+
+<header style="height: 88px; box-sizing: border-box; padding: 0 64px; display: flex; align-items: center; justify-content: space-between">
+<a href="#inicio" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: #FFF8E7">
+<span style="width: 44px; height: 44px; border-radius: 12px; background: #FFC928; border: 3px solid #0B0E33; box-shadow: 0 4px 0 #0B0E33; display: flex; align-items: center; justify-content: center; color: #0B0E33">
+<svg width="24" height="24" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round" aria-hidden="true"><path d="M11 3h8M12.5 3v8L5 24.5A2 2 0 0 0 6.8 27.5h16.4a2 2 0 0 0 1.8-3L17.5 11V3"></path><path d="M8.5 19h13"></path></svg>
+</span>
+<span style="font-family: 'Lilita One', sans-serif; font-size: 24px; letter-spacing: 0.02em">LABORATORIO DIGITAL</span>
+</a>
+<nav aria-label="Principal" style="display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 800">
+<a href="#estudio" style="color: #0B0E33; background: #FFC928; text-decoration: none; padding: 10px 18px; border-radius: 999px; border: 3px solid #0B0E33">Diseño, marketing y video</a>
+<a href="#merch" style="color: #FFF8E7; text-decoration: none; padding: 10px 18px">Merch y logística</a>
+<a href="#casos" style="color: #FFF8E7; text-decoration: none; padding: 10px 18px">Casos</a>
+<a href="#contacto" style="color: #FFF8E7; text-decoration: none; padding: 10px 18px">Contacto</a>
+</nav>
+</header>
+
+<div style="flex-grow: 1; box-sizing: border-box; padding: 36px 64px 64px; display: flex; gap: 40px">
+
+<main style="width: 912px; display: flex; flex-direction: column; gap: 36px">
+
+<section style="display: flex; justify-content: space-between; align-items: flex-end; gap: 32px">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<span style="align-self: flex-start; font-weight: 900; font-size: 13px; letter-spacing: 0.1em; color: #0B0E33; background: #FFF8E7; padding: 6px 12px; border-radius: 8px">DISEÑO / MARKETING / AUDIOVISUAL</span>
+<h1 style="margin: 0; font-family: 'Lilita One', sans-serif; font-weight: 400; font-size: 60px; line-height: 1; letter-spacing: 0.01em; text-shadow: 0 5px 0 #FF5A36">Elige tus cartas.<br>Arma tu mazo.</h1>
+<p style="margin: 0; max-width: 520px; font-size: 17px; font-weight: 600; line-height: 1.5; color: #D6D9FF">Tres disciplinas, módulos independientes. Juega una sola carta o combínalas y activa bonus por combo.</p>
+</div>
+<ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 15px; font-weight: 700; min-width: 250px">
+<li style="display: flex; gap: 12px; align-items: center"><span style="width: 30px; height: 30px; border-radius: 50%; background: rgb(255, 90, 54); color: rgb(11, 14, 51); border: 2px solid rgb(11, 14, 51); font-family: &quot;Lilita One&quot;, sans-serif; display: flex; align-items: center; justify-content: center">1</span>Elige un servicio</li>
+<li style="display: flex; gap: 12px; align-items: center"><span style="width: 30px; height: 30px; border-radius: 50%; background: #FFC928; color: #0B0E33; border: 2px solid #0B0E33; font-family: 'Lilita One', sans-serif; display: flex; align-items: center; justify-content: center">2</span>Suma tus módulos</li>
+<li style="display: flex; gap: 12px; align-items: center"><span style="width: 30px; height: 30px; border-radius: 50%; background: #A78BFA; color: #0B0E33; border: 2px solid #0B0E33; font-family: 'Lilita One', sans-serif; display: flex; align-items: center; justify-content: center">3</span>Envía tu mazo</li>
+</ol>
+</section>
+
+<section aria-label="Categorías" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px">
+<sc-for list="{{cards}}" as="item" hint-placeholder-count="3">
+<button class="holo" onClick="{{item.pick}}" aria-pressed="{{item.pressed}}" style="appearance: none; font: inherit; color: #1A1206; text-align: left; height: 470px; box-sizing: border-box; padding: 9px; border-radius: 20px; border: 3px solid #0B0E33; background: {{item.frame}}; box-shadow: {{item.shadow}}; display: flex">
+<div style="flex-grow: 1; border-radius: 13px; background: {{item.tint}}; border: 2px solid {{item.dark}}; padding: 10px; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; justify-content: space-between; align-items: center">
+<span style="font-family: 'Lilita One', sans-serif; font-size: 26px; letter-spacing: 0.02em; color: #1A1206">{{item.name}}</span>
+<span style="width: 34px; height: 34px; border-radius: 50%; background: {{item.frame}}; border: 2px solid {{item.dark}}; color: {{item.dark}}; display: flex; align-items: center; justify-content: center">
+<sc-if value="{{item.isDis}}" hint-placeholder-val="{{true}}"><svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1c3 4 6 6.5 6 11a6 6 0 0 1-12 0c0-2.5 1.2-4 2.6-5.4.3 1.8 1.2 2.8 2.4 3.2C8.4 6.8 8.6 4 10 1z"></path></svg></sc-if>
+<sc-if value="{{item.isMkt}}" hint-placeholder-val="{{false}}"><svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M11.5 1 3 11.5h5.5L7.5 19 17 7.5h-5.8z"></path></svg></sc-if>
+<sc-if value="{{item.isAv}}" hint-placeholder-val="{{false}}"><svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M6 3.5v13l11-6.5z"></path></svg></sc-if>
+</span>
+</div>
+<div style="height: 150px; flex-shrink: 0; position: relative; overflow: hidden; border-radius: 8px; border: 3px solid {{item.dark}}; background: {{item.burst}}; display: flex; align-items: center; justify-content: center; color: {{item.dark}}">
+<sc-if value="{{item.isDis}}" hint-placeholder-val="{{true}}">
+<svg width="96" height="100" viewBox="0 0 88 92" fill="#FFF8E7" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M44 8 L68 40 L52 76 H36 L20 40 Z"></path><circle cx="44" cy="46" r="6"></circle><path d="M44 8 V40" fill="none"></path><path d="M32 86 H56"></path></svg>
+</sc-if>
+<sc-if value="{{item.isMkt}}" hint-placeholder-val="{{false}}">
+<svg width="96" height="100" viewBox="0 0 88 92" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="42" cy="50" r="32" fill="#FFF8E7"></circle><circle cx="42" cy="50" r="19"></circle><circle cx="42" cy="50" r="6" fill="currentColor"></circle><path d="M42 50 L76 16"></path><path d="M64 14 H78 V28"></path></svg>
+</sc-if>
+<sc-if value="{{item.isAv}}" hint-placeholder-val="{{false}}">
+<svg width="96" height="100" viewBox="0 0 88 92" fill="#FFF8E7" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><rect x="8" y="28" width="54" height="40" rx="7"></rect><path d="M62 40 L82 29 V67 L62 56 Z"></path><circle cx="28" cy="48" r="10"></circle><path d="M14 20 H30" fill="none"></path></svg>
+</sc-if>
+</div>
+<div style="display: flex; justify-content: space-between; font-size: 11px; font-weight: 900; letter-spacing: 0.06em; color: {{item.dark}}">
+<span>N.º {{item.num}} · {{item.clase}}</span><span>★★★ · {{item.countLabel}}</span>
+</div>
+<div style="background: #FFFDF6; border: 2px solid {{item.dark}}; border-radius: 8px; padding: 8px 10px; font-size: 13px; line-height: 1.35; color: #1A1206">
+<span style="font-weight: 900; color: {{item.dark}}">Habilidad · </span>{{item.tag}}
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px; font-size: 12px; font-weight: 700; color: #1A1206">
+<div style="display: flex; justify-content: space-between; gap: 10px"><span style="font-weight: 900; color: {{item.dark}}">IDEAL PARA</span><span style="text-align: right">{{item.ideal}}</span></div>
+<div style="display: flex; justify-content: space-between; gap: 10px"><span style="font-weight: 900; color: {{item.dark}}">ENTREGA</span><span>{{item.entrega}}</span></div>
+</div>
+<span style="margin-top: auto; text-align: center; font-weight: 900; font-size: 14px; padding: 9px; border-radius: 10px; background: {{item.dark}}; color: #FFF8E7">{{item.cta}}</span>
+</div>
+</button>
+</sc-for>
+</section>
+
+
+<section aria-label="Módulos" style="display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; justify-content: space-between; align-items: center">
+<h2 style="margin: 0; font-family: 'Lilita One', sans-serif; font-weight: 400; font-size: 28px; display: flex; align-items: center; gap: 12px">Módulos de <span style="color: #0B0E33; background: {{openFrame}}; border: 3px solid #0B0E33; border-radius: 10px; padding: 2px 12px; box-shadow: 0 4px 0 #0B0E33">{{openName}}</span></h2>
+<span style="font-size: 14px; font-weight: 700; color: #B8BCE8">Precios referenciales “desde”, en soles, sin IGV</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px">
+<sc-for list="{{modules}}" as="item" hint-placeholder-count="6">
+<article class="mod" style="height: 200px; box-sizing: border-box; border-radius: 16px; background: #FFF8E7; color: #1A1206; border: 3px solid {{item.ring}}; box-shadow: 0 6px 0 {{item.shadow}}; overflow: hidden; display: flex; flex-direction: column">
+<div style="height: 10px; flex-shrink: 0; background: {{item.frame}}; border-bottom: 2px solid {{item.dark}}"></div>
+<div style="flex-grow: 1; padding: 12px 16px 14px; display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; justify-content: space-between; font-size: 11px; font-weight: 900; letter-spacing: 0.06em; color: {{item.dark}}"><span>{{item.code}}</span><span>{{item.kind}}</span></div>
+<div style="font-family: 'Lilita One', sans-serif; font-size: 19px; letter-spacing: 0.01em">{{item.name}}</div>
+<div style="font-size: 13px; font-weight: 600; line-height: 1.4; color: #4A3F2E">{{item.desc}}</div>
+<div style="margin-top: auto; display: flex; justify-content: space-between; align-items: center">
+<span style="font-family: 'Lilita One', sans-serif; font-size: 17px; background: {{item.tint}}; border: 2px solid {{item.dark}}; border-radius: 999px; padding: 4px 12px">{{item.priceLabel}}<span style="font-family: Nunito, sans-serif; font-weight: 800; font-size: 11px">{{item.unit}}</span></span>
+<button class="chunky" onClick="{{item.toggle}}" aria-pressed="{{item.pressed}}" style="appearance: none; font: inherit; font-size: 13px; font-weight: 900; min-height: 44px; padding: 0 16px; border-radius: 12px; cursor: pointer; background: {{item.btnBg}}; color: {{item.btnColor}}; border: 3px solid #0B0E33; box-shadow: 0 3px 0 #0B0E33">{{item.btnLabel}}</button>
+</div>
+</div>
+</article>
+</sc-for>
+</div>
+</section>
+
+</main>
+
+<aside aria-label="Tu mazo" style="width: 360px; align-self: flex-start; box-sizing: border-box; padding: 24px; border-radius: 24px; background: #FFF8E7; color: #1A1206; border: 4px solid #0B0E33; box-shadow: 0 10px 0 #0B0E33; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; justify-content: space-between; align-items: center">
+<h2 style="margin: 0; font-family: 'Lilita One', sans-serif; font-weight: 400; font-size: 28px; color: #14184A">Tu mazo</h2>
+<span style="font-weight: 900; font-size: 13px; color: #FFF8E7; background: #14184A; padding: 5px 12px; border-radius: 999px">{{deckCount}}</span>
+</div>
+
+<sc-if value="{{deckEmpty}}" hint-placeholder-val="{{false}}">
+<div style="height: 170px; border-radius: 14px; border: 3px dashed #B9AE95; display: flex; align-items: center; justify-content: center; text-align: center; padding: 20px; box-sizing: border-box; font-size: 14px; font-weight: 700; color: #6B604D">Tu mazo está vacío. Toca una carta y agrega módulos.</div>
+</sc-if>
+
+<div style="display: flex; flex-direction: column; gap: 10px; max-height: 400px; overflow-y: auto">
+<sc-for list="{{deck}}" as="item" hint-placeholder-count="2">
+<div style="display: flex; align-items: center; gap: 10px; padding: 8px 8px 8px 8px; border-radius: 12px; background: {{item.tint}}; border: 2px solid {{item.dark}}">
+<span style="width: 10px; align-self: stretch; border-radius: 6px; background: {{item.frame}}; border: 2px solid {{item.dark}}"></span>
+<div style="flex-grow: 1; display: flex; flex-direction: column; gap: 1px">
+<span style="font-family: 'Lilita One', sans-serif; font-size: 16px">{{item.name}}</span>
+<span style="font-size: 12px; font-weight: 800; color: {{item.dark}}">{{item.catName}} · {{item.priceLabel}}{{item.unit}}</span>
+</div>
+<button onClick="{{item.remove}}" aria-label="Quitar {{item.name}}" style="appearance: none; width: 44px; height: 44px; border-radius: 10px; border: 2px solid {{item.dark}}; background: #FFFDF6; color: {{item.dark}}; cursor: pointer; display: flex; align-items: center; justify-content: center">
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13"></path></svg>
+</button>
+</div>
+</sc-for>
+</div>
+
+<div aria-label="Carta comodín" style="padding: 12px; border-radius: 14px; background: #DDF7F3; border: 3px dashed #0E7C72; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="display: flex; align-items: center; gap: 6px; font-family: 'Lilita One', sans-serif; font-size: 17px; color: #0E5E57"><span style="width: 24px; height: 24px; border-radius: 50%; background: #2EC4B6; border: 2px solid #0E5E57; color: #0B0E33; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg></span>Comodín · a tu medida</span>
+<span style="font-size: 12px; font-weight: 700; line-height: 1.35; color: #2F5652">¿Necesitas algo que no está en las cartas? Escríbelo y lo cotizamos.</span>
+</div>
+<div style="display: flex; gap: 8px">
+<input type="text" aria-label="Tu idea" value="{{draft}}" onChange="{{onDraft}}" placeholder="Ej. Grabación con drones" style="flex-grow: 1; min-width: 0; font: inherit; font-size: 14px; font-weight: 700; min-height: 44px; padding: 0 10px; border-radius: 10px; border: 2px solid #0E5E57; background: #FFFDF6; color: #1A1206">
+<button class="chunky" onClick="{{addWild}}" style="appearance: none; font: inherit; flex-shrink: 0; min-height: 44px; padding: 0 12px; border-radius: 10px; cursor: pointer; border: 2px solid #0B0E33; box-shadow: 0 3px 0 #0B0E33; background: #2EC4B6; color: #0B0E33; font-size: 14px; font-weight: 900">+ Agregar</button>
+</div>
+</div>
+
+<div style="padding: 12px 14px; border-radius: 14px; background: {{comboBg}}; border: 3px solid #0B0E33; display: flex; flex-direction: column; gap: 2px">
+<span style="font-family: 'Lilita One', sans-serif; font-size: 18px; color: #0B0E33">{{comboLabel}}</span>
+<span style="font-size: 13px; font-weight: 700; color: #2A2418">{{comboHint}}</span>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 700">
+<div style="display: flex; justify-content: space-between; color: #4A3F2E"><span>Subtotal</span><span>{{subtotalLabel}}</span></div>
+<div style="display: flex; justify-content: space-between; color: #4A3F2E"><span>Bonus combo</span><span>{{discountLabel}}</span></div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 4px; border-top: 3px dotted #B9AE95; padding-top: 10px"><span style="font-weight: 900; color: #14184A">Inversión estimada</span><span style="font-family: 'Lilita One', sans-serif; font-size: 30px; color: #14184A">{{totalLabel}}</span></div>
+<span style="font-size: 12px; font-weight: 600; line-height: 1.45; color: #6B604D">Referencial, sin IGV. Los módulos mensuales se suman por el primer mes. La pauta publicitaria se paga aparte.</span>
+</div>
+
+<a class="chunky" href="{{waHref}}" style="min-height: 56px; border-radius: 16px; background: #FFC928; color: #0B0E33; border: 3px solid #0B0E33; box-shadow: 0 5px 0 #0B0E33; font-weight: 900; font-size: 16px; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px">
+¡Enviar mi mazo por WhatsApp!
+</a>
+<a href="#agendar" style="min-height: 44px; border-radius: 14px; border: 3px solid #14184A; color: #14184A; font-weight: 800; font-size: 14px; text-decoration: none; display: flex; align-items: center; justify-content: center">Prefiero agendar una llamada</a>
+</aside>
+
+</div>
+
+<footer style="flex-shrink: 0; flex-grow: 1; box-sizing: border-box; background: #0B0E33; color: #FFF8E7; padding: 56px 56px 0">
+<div style="display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 44px">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; align-items: center; gap: 10px"><span style="width: 42px; height: 42px; border-radius: 12px; background: #FFC928; color: #0B0E33; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round" aria-hidden="true"><path d="M11 3h8M12.5 3v8L5 24.5A2 2 0 0 0 6.8 27.5h16.4a2 2 0 0 0 1.8-3L17.5 11V3"/><path d="M8.5 19h13"/></svg></span><span style="font-family: 'Lilita One', sans-serif; font-weight: 400; letter-spacing: 0.02em; font-size: 22px; line-height: 1.05">Laboratorio<br>Digital</span></div>
+<p style="margin: 0; max-width: 320px; font-size: 15px; font-weight: 500; line-height: 1.5; color: #B8BCE8">Diseño, marketing, video y merchandising para empresas, marcas y creadores.</p>
+<div style="display: flex; gap: 10px; margin-top: 4px"><a href="#instagram" aria-label="Instagram" style="width: 40px; height: 40px; border-radius: 50%; background: #1C2160; color: #FFF8E7; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 900; text-decoration: none">IG</a><a href="#tiktok" aria-label="TikTok" style="width: 40px; height: 40px; border-radius: 50%; background: #1C2160; color: #FFF8E7; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 900; text-decoration: none">TT</a><a href="#facebook" aria-label="Facebook" style="width: 40px; height: 40px; border-radius: 50%; background: #1C2160; color: #FFF8E7; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 900; text-decoration: none">FB</a><a href="#linkedin" aria-label="LinkedIn" style="width: 40px; height: 40px; border-radius: 50%; background: #1C2160; color: #FFF8E7; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 900; text-decoration: none">in</a></div>
+</div>
+<nav aria-label="Servicios" style="display: flex; flex-direction: column; gap: 12px"><span style="font-size: 13px; font-weight: 800; letter-spacing: 0.1em; color: #B8BCE8">SERVICIOS</span><a href="#estudio" style="color: #FFF8E7; text-decoration: none; font-size: 16px; font-weight: 600">Diseño, marketing y video</a><a href="#empresas" style="color: #FFF8E7; text-decoration: none; font-size: 16px; font-weight: 600">Merch para empresas</a><a href="#marca" style="color: #FFF8E7; text-decoration: none; font-size: 16px; font-weight: 600">Crea tu marca</a></nav>
+<div style="display: flex; flex-direction: column; gap: 12px"><span style="font-size: 13px; font-weight: 800; letter-spacing: 0.1em; color: #B8BCE8">CONTACTO</span><a href="https://wa.me/51966495267" style="display: flex; align-items: center; gap: 10px; color: #FFF8E7; text-decoration: none; font-size: 16px; font-weight: 600"><span style="color: #B8BCE8; display: flex"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 11.7a8.5 8.5 0 0 1-12.6 7.4L3.5 20.5l1.4-4.2A8.5 8.5 0 1 1 20.5 11.7z"/><path d="M9 8.5c0 3.5 2.5 6.5 6.5 6.5l1-1.6-2.2-1-1 .9a4.6 4.6 0 0 1-2.6-2.6l.9-1-1-2.2L9 8.5z"/></svg></span>+51 966 495 267</a><a href="#correo" style="display: flex; align-items: center; gap: 10px; color: #FFF8E7; text-decoration: none; font-size: 16px; font-weight: 600"><span style="color: #B8BCE8; display: flex"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>[correo de contacto]</a><span style="display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 600"><span style="color: #B8BCE8; display: flex"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span>Lima, Perú</span></div>
+<div style="display: flex; flex-direction: column; gap: 12px"><span style="font-size: 13px; font-weight: 800; letter-spacing: 0.1em; color: #B8BCE8">ATENCIÓN AL CLIENTE</span><a href="#libro-de-reclamaciones" style="align-self: flex-start; min-height: 48px; padding: 0 14px; border-radius: 12px; border: 2px solid #FFF8E7; color: #FFF8E7; display: flex; align-items: center; gap: 10px; text-decoration: none; font-size: 15px; font-weight: 800"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H20v16H5.5A1.5 1.5 0 0 0 4 20.5z"/><path d="M4 20.5A1.5 1.5 0 0 0 5.5 22H20v-3"/><path d="M9 8h7M9 12h5"/></svg>Libro de Reclamaciones</a><span style="font-size: 13px; font-weight: 500; line-height: 1.45; color: #B8BCE8">Conforme al Código de Protección y Defensa del Consumidor.</span></div>
+</div>
+<div style="border-top: 1px solid #262B66; padding: 20px 0 24px; display: flex; justify-content: space-between; align-items: center; gap: 24px; font-size: 14px; font-weight: 600; color: #B8BCE8">
+<span>© 2026 LABORATORIO DIGITAL E.I.R.L. · RUC 20616378555 · Todos los derechos reservados.</span>
+<span style="display: flex; gap: 24px"><a href="#terminos" style="color: #B8BCE8">Términos y condiciones</a><a href="#privacidad" style="color: #B8BCE8">Política de privacidad</a></span>
+</div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"combo2":{"editor":"int","default":10,"min":0,"max":40,"unit":"%","section":"Combos"},"combo3":{"editor":"int","default":15,"min":0,"max":50,"unit":"%","section":"Combos"},"$preview":{"width":1440,"height":1888}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { open: 'dis', deck: ['d2', 'a1'], wild: [], draft: '' };
+  }
+  renderVals() {
+    const burst = (a, b) => 'repeating-conic-gradient(from 0deg at 50% 55%, ' + a + ' 0deg 10deg, ' + b + ' 10deg 20deg)';
+    const CATS = [
+      { id: 'dis', num: '01', clase: 'CLASE FUEGO CREATIVO', name: 'DISEÑO', frame: '#FF5A36', dark: '#8A2208', tint: '#FFE4D9', burst: burst('#FF8A5B', '#FFB08A'), tag: 'Identidad de marca y piezas gráficas', ideal: 'Marcas nuevas o en rebranding', entrega: '5 a 15 días' },
+      { id: 'mkt', num: '02', clase: 'CLASE ELÉCTRICA', name: 'MARKETING', frame: '#FFC928', dark: '#7A4E00', tint: '#FFF3C4', burst: burst('#FFD84D', '#FFE88F'), tag: 'Redes, pauta y estrategia digital', ideal: 'Negocios que quieren vender online', entrega: 'Plan mensual' },
+      { id: 'av', num: '03', clase: 'CLASE VISIÓN', name: 'AUDIOVISUAL', frame: '#8B5CF6', dark: '#3B1782', tint: '#ECE4FF', burst: burst('#A98BFF', '#C9B8FF'), tag: 'Video, foto y post-producción', ideal: 'Lanzamientos, eventos y contenido', entrega: '3 a 20 días' }
+    ];
+    const MODS = [
+      { id: 'd1', cat: 'dis', code: 'D-01', kind: 'PROYECTO', name: 'Logotipo', desc: 'Concepto, logo final, adaptación para redes y papelería básica.', price: 900, unit: '' },
+      { id: 'd2', cat: 'dis', code: 'D-02', kind: 'PROYECTO', name: 'Identidad de marca', desc: 'Brandbook: logo, paleta, tipografía, tono de voz y línea gráfica.', price: 2500, unit: '' },
+      { id: 'd3', cat: 'dis', code: 'D-03', kind: 'PACK', name: 'Pack de 12 piezas', desc: 'Posts, stories y portadas con la línea gráfica de tu marca.', price: 600, unit: '' },
+      { id: 'd4', cat: 'dis', code: 'D-04', kind: 'POR PIEZA', name: 'Diseño publicitario', desc: 'Afiches, volantes, banners o vallas en formato impreso y digital.', price: 250, unit: '' },
+      { id: 'd5', cat: 'dis', code: 'D-05', kind: 'PROYECTO', name: 'Packaging y etiquetas', desc: 'Diseño de empaque y etiquetas listo para producción.', price: 1200, unit: '' },
+      { id: 'd6', cat: 'dis', code: 'D-06', kind: 'PROYECTO', name: 'Ilustración y personajes', desc: 'Personajes, mascotas de marca o ilustración a medida.', price: 800, unit: '' },
+      { id: 'm1', cat: 'mkt', code: 'M-01', kind: 'MENSUAL', name: 'Gestión de redes', desc: 'Parrilla, diseño de contenidos, copies y community management.', price: 1500, unit: '/mes' },
+      { id: 'm2', cat: 'mkt', code: 'M-02', kind: 'MENSUAL', name: 'Campañas de Ads', desc: 'Configuración y optimización en Meta y TikTok. Pauta aparte.', price: 900, unit: '/mes' },
+      { id: 'm3', cat: 'mkt', code: 'M-03', kind: 'PROYECTO', name: 'Estrategia de contenidos', desc: 'Análisis de marca y competencia, pilares y plan de 3 meses.', price: 1200, unit: '' },
+      { id: 'm4', cat: 'mkt', code: 'M-04', kind: 'MENSUAL', name: 'Métricas y reportes', desc: 'Análisis de resultados y recomendaciones cada mes.', price: 400, unit: '/mes' },
+      { id: 'm5', cat: 'mkt', code: 'M-05', kind: 'CAMPAÑA', name: 'Campaña con influencers', desc: 'Selección, coordinación y seguimiento de colaboraciones.', price: 1500, unit: '' },
+      { id: 'm6', cat: 'mkt', code: 'M-06', kind: 'MENSUAL', name: 'Comunicación interna', desc: 'Piezas para colaboradores: saludos, logros y bienvenidas.', price: 700, unit: '/mes' },
+      { id: 'a1', cat: 'av', code: 'A-01', kind: 'PACK', name: 'Pack de 4 reels', desc: 'Guion, grabación y edición vertical para redes.', price: 1200, unit: '' },
+      { id: 'a2', cat: 'av', code: 'A-02', kind: 'PROYECTO', name: 'Video institucional', desc: 'Guion, rodaje con equipo completo, colorización y formatos.', price: 3500, unit: '' },
+      { id: 'a3', cat: 'av', code: 'A-03', kind: 'EVENTO', name: 'Registro de evento', desc: 'Fotos del evento y video reel de 1 minuto.', price: 1200, unit: '' },
+      { id: 'a4', cat: 'av', code: 'A-04', kind: 'SESIÓN', name: 'Fotos de producto', desc: 'Sesión en estudio con retoque, lista para ecommerce y redes.', price: 800, unit: '' },
+      { id: 'a5', cat: 'av', code: 'A-05', kind: 'POR VIDEO', name: 'Edición, post y VFX', desc: 'Edición, color, chroma, tracking y limpieza de material.', price: 600, unit: '' },
+      { id: 'a6', cat: 'av', code: 'A-06', kind: 'PROYECTO', name: 'Animación 2D / motion', desc: 'Guion, diseño de personajes y animación con motion graphics.', price: 2000, unit: '' }
+    ];
+    const combo2 = this.props.combo2 ?? 10;
+    const combo3 = this.props.combo3 ?? 15;
+    const soles = (n) => 'S/ ' + n.toLocaleString('es-PE');
+    const catById = {};
+    CATS.forEach((c) => { catById[c.id] = c; });
+    const deckIds = this.state.deck;
+    const inDeck = (id) => deckIds.indexOf(id) !== -1;
+    const toggle = (id) => {
+      const d = this.state.deck;
+      this.setState({ deck: d.indexOf(id) !== -1 ? d.filter((x) => x !== id) : d.concat([id]) });
+    };
+    const open = catById[this.state.open];
+
+    const cards = CATS.map((c) => {
+      const n = MODS.filter((m) => m.cat === c.id && inDeck(m.id)).length;
+      const isOpen = c.id === this.state.open;
+      return {
+        ...c,
+        isDis: c.id === 'dis', isMkt: c.id === 'mkt', isAv: c.id === 'av',
+        pressed: isOpen ? 'true' : 'false',
+        shadow: isOpen ? '0 0 0 5px #FFF8E7, 0 0 40px 6px ' + c.frame + ', 0 10px 0 #0B0E33' : '0 8px 0 #0B0E33',
+        countLabel: n + '/6',
+        cta: isOpen ? '¡Carta en juego! ↓' : 'Ver módulos →',
+        pick: () => this.setState({ open: c.id })
+      };
+    });
+
+    const modules = MODS.filter((m) => m.cat === open.id).map((m) => {
+      const on = inDeck(m.id);
+      return {
+        ...m,
+        frame: open.frame, dark: open.dark, tint: open.tint,
+        priceLabel: soles(m.price),
+        pressed: on ? 'true' : 'false',
+        ring: on ? open.frame : '#0B0E33',
+        shadow: on ? open.dark : '#0B0E33',
+        btnBg: on ? open.frame : '#FFFDF6',
+        btnColor: '#0B0E33',
+        btnLabel: on ? '¡En tu mazo! ✓' : '+ Agregar',
+        toggle: () => toggle(m.id)
+      };
+    });
+
+    const chosen = MODS.filter((m) => inDeck(m.id));
+    const deck = chosen.map((m) => ({
+      name: m.name,
+      catName: catById[m.cat].name,
+      frame: catById[m.cat].frame,
+      dark: catById[m.cat].dark,
+      tint: catById[m.cat].tint,
+      priceLabel: soles(m.price),
+      unit: m.unit,
+      remove: () => toggle(m.id)
+    }));
+    const wildItems = this.state.wild.map((t, i) => ({
+      name: t,
+      catName: 'COMODÍN',
+      frame: '#2EC4B6', dark: '#0E5E57', tint: '#DDF7F3', accent: '#2EC4B6',
+      priceLabel: 'A cotizar',
+      unit: '',
+      remove: () => this.setState({ wild: this.state.wild.filter((_, j) => j !== i) })
+    }));
+    const deckAll = deck.concat(wildItems);
+    const nCats = CATS.filter((c) => chosen.some((m) => m.cat === c.id)).length;
+    const pct = nCats >= 3 ? combo3 : nCats === 2 ? combo2 : 0;
+    const subtotal = chosen.reduce((s, m) => s + m.price, 0);
+    const discount = Math.round(subtotal * pct / 100);
+    const total = subtotal - discount;
+
+    let comboHint = 'Agrega módulos para empezar tu mazo.';
+    if (nCats === 1) comboHint = 'Juega una carta de otra clase y activa −' + combo2 + '%.';
+    if (nCats === 2) comboHint = 'Juega la tercera carta y sube a −' + combo3 + '%.';
+    if (nCats >= 3) comboHint = 'Mazo completo: bonus máximo activado.';
+
+    const lines = chosen.map((m) => '• ' + m.name + ' (' + catById[m.cat].name + ') ' + soles(m.price) + m.unit).join('\n');
+    const wildLines = this.state.wild.map((t) => '\n• Comodín (a cotizar): ' + t).join('');
+    const msg = 'Hola Laboratorio Digital, quiero cotizar este mazo:\n' + lines + wildLines + '\nTotal referencial: ' + soles(total) + (pct ? ' (combo −' + pct + '%)' : '');
+
+    return {
+      draft: this.state.draft,
+      onDraft: (e) => this.setState({ draft: e && e.target ? e.target.value : '' }),
+      addWild: () => { const t = (this.state.draft || '').trim(); if (t) this.setState({ wild: this.state.wild.concat([t]), draft: '' }); },
+      cards,
+      modules,
+      openName: open.name,
+      openFrame: open.frame,
+      deck: deckAll,
+      deckEmpty: deckAll.length === 0,
+      deckCount: deckAll.length + (deckAll.length === 1 ? ' carta' : ' cartas'),
+      comboLabel: pct ? '¡COMBO x' + nCats + '! −' + pct + '%' : 'Sin combo todavía',
+      comboHint,
+      comboBg: pct ? '#FFC928' : '#EFE6D0',
+      subtotalLabel: soles(subtotal),
+      discountLabel: discount ? '− ' + soles(discount) : soles(0),
+      totalLabel: soles(total),
+      waHref: 'https://wa.me/51966495267?text=' + encodeURIComponent(msg)
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+---
+// Ilustraciones propias de "Crea tu marca" (tomadas del diseño aprobado).
+// Preguntas: viewBox 240×170. Servicios: viewBox 120×90.
+export type IlustracionId =
+  | 'audiencia'
+  | 'personajes'
+  | 'artista'
+  | 'marca-propia'
+  | 'diseno'
+  | 'volumen'
+  | 'almacen'
+  | 'online'
+  | 'envio'
+  | 'postventa';
+
+interface Props {
+  id: IlustracionId;
+}
+const { id } = Astro.props;
+---
+
+{
+  id === 'audiencia' && (
+    <svg viewBox="0 0 240 170" aria-hidden="true">
+      <rect x="150" y="20" width="62" height="40" rx="8" fill="#FFE1D8" />
+      <path d="M181 50c-9-6-14-10-14-15a6 6 0 0 1 14-3 6 6 0 0 1 14 3c0 5-5 9-14 15z" fill="#FF6B4A" />
+      <rect x="24" y="44" width="54" height="34" rx="8" fill="#D6F2EE" />
+      <circle cx="41" cy="61" r="7" fill="#1FB5A5" />
+      <path d="M52 57h18M52 65h12" stroke="#1FB5A5" stroke-width="4" stroke-linecap="round" />
+      <rect x="86" y="30" width="72" height="128" rx="14" fill="#141414" />
+      <rect x="92" y="40" width="60" height="104" rx="8" fill="#FFFFFF" />
+      <circle cx="122" cy="72" r="16" fill="#FFC21A" />
+      <path d="M114 70q8 9 16 0" stroke="#141414" stroke-width="3" fill="none" stroke-linecap="round" />
+      <rect x="102" y="96" width="40" height="7" rx="3.5" fill="#E6E6E6" />
+      <rect x="108" y="110" width="28" height="7" rx="3.5" fill="#E6E6E6" />
+      <rect x="100" y="124" width="44" height="12" rx="6" fill="#1FB5A5" />
+      <circle cx="196" cy="98" r="9" fill="#B9A6F5" />
+      <circle cx="212" cy="116" r="6" fill="#FFC21A" />
+      <circle cx="46" cy="112" r="8" fill="#FF6B4A" opacity=".8" />
+      <path d="M14 158h212" stroke="#8FD9CF" stroke-width="3" stroke-linecap="round" />
+    </svg>
+  )
+}
+{
+  id === 'personajes' && (
+    <svg viewBox="0 0 240 170" aria-hidden="true">
+      <rect x="150" y="26" width="64" height="80" rx="4" fill="#FFFFFF" stroke="#D9D9D9" stroke-width="3" />
+      <path d="M164 78c4-18 14-26 20-26s14 6 16 24" stroke="#B9A6F5" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="5 5" />
+      <path d="M170 92h30" stroke="#D9D9D9" stroke-width="3" stroke-linecap="round" />
+      <ellipse cx="96" cy="118" rx="52" ry="40" fill="#B9A6F5" />
+      <ellipse cx="62" cy="76" rx="13" ry="17" fill="#B9A6F5" />
+      <ellipse cx="130" cy="76" rx="13" ry="17" fill="#B9A6F5" />
+      <ellipse cx="62" cy="78" rx="6" ry="9" fill="#FFD6E8" />
+      <ellipse cx="130" cy="78" rx="6" ry="9" fill="#FFD6E8" />
+      <circle cx="80" cy="110" r="6" fill="#141414" />
+      <circle cx="112" cy="110" r="6" fill="#141414" />
+      <circle cx="82" cy="108" r="2" fill="#FFFFFF" />
+      <circle cx="114" cy="108" r="2" fill="#FFFFFF" />
+      <path d="M88 124q8 7 16 0" stroke="#141414" stroke-width="3" fill="none" stroke-linecap="round" />
+      <circle cx="70" cy="126" r="6" fill="#FF9EC4" opacity=".7" />
+      <circle cx="122" cy="126" r="6" fill="#FF9EC4" opacity=".7" />
+      <path d="M36 40l4 9 9 4-9 4-4 9-4-9-9-4 9-4z" fill="#FFC21A" />
+      <path d="M140 30l3 6 6 3-6 3-3 6-3-6-6-3 6-3z" fill="#FFC21A" />
+      <path d="M14 158h212" stroke="#8FD9CF" stroke-width="3" stroke-linecap="round" />
+    </svg>
+  )
+}
+{
+  id === 'artista' && (
+    <svg viewBox="0 0 240 170" aria-hidden="true">
+      <path d="M30 150V64M30 64l30-26M60 38l12 10" stroke="#9A9A9A" stroke-width="5" stroke-linecap="round" fill="none" />
+      <path d="M62 40l22-6-6 22z" fill="#9A9A9A" />
+      <rect x="18" y="148" width="26" height="8" rx="3" fill="#9A9A9A" />
+      <path d="M104 70c30-24 96-18 104 20 5 24-16 22-26 26-12 5-4 24-26 26-40 3-78-38-52-72z" fill="#FFE7C2" stroke="#141414" stroke-width="3" />
+      <circle cx="130" cy="78" r="9" fill="#FF6B4A" />
+      <circle cx="160" cy="72" r="9" fill="#FFC21A" />
+      <circle cx="186" cy="88" r="9" fill="#1FB5A5" />
+      <circle cx="124" cy="106" r="9" fill="#B9A6F5" />
+      <circle cx="164" cy="112" r="8" fill="#FFFFFF" stroke="#141414" stroke-width="3" />
+      <path d="M196 30l-44 58" stroke="#141414" stroke-width="7" stroke-linecap="round" />
+      <path d="M152 88l-8 12 12-6z" fill="#FF6B4A" />
+      <path d="M14 158h212" stroke="#8FD9CF" stroke-width="3" stroke-linecap="round" />
+    </svg>
+  )
+}
+{
+  id === 'marca-propia' && (
+    <svg viewBox="0 0 240 170" aria-hidden="true">
+      <path d="M40 60l22-14h16q6 10 18 10t18-10h16l22 14-12 22-14-8v84H64V74l-14 8z" fill="#1FB5A5" />
+      <path d="M80 46q5 12 16 12t16-12" stroke="#0E7C72" stroke-width="3" fill="none" />
+      <circle cx="96" cy="100" r="14" fill="#FFFFFF" />
+      <path d="M90 100l4 4 8-8" stroke="#1FB5A5" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M150 64a26 22 0 0 1 52 0v6h-52z" fill="#FF6B4A" />
+      <path d="M146 70h66q6 0 4 6h-70z" fill="#D84B2C" />
+      <circle cx="176" cy="44" r="4" fill="#D84B2C" />
+      <circle cx="176" cy="130" r="26" fill="#FFC21A" />
+      <circle cx="156" cy="108" r="9" fill="#FFC21A" />
+      <circle cx="196" cy="108" r="9" fill="#FFC21A" />
+      <circle cx="168" cy="126" r="3.5" fill="#141414" />
+      <circle cx="184" cy="126" r="3.5" fill="#141414" />
+      <ellipse cx="176" cy="136" rx="7" ry="5" fill="#FFE7C2" />
+      <circle cx="176" cy="134" r="2.5" fill="#141414" />
+      <path d="M14 158h212" stroke="#8FD9CF" stroke-width="3" stroke-linecap="round" />
+    </svg>
+  )
+}
+{
+  id === 'diseno' && (
+    <svg viewBox="0 0 120 90" aria-hidden="true">
+      <rect x="22" y="14" width="56" height="68" rx="4" fill="#FFFFFF" stroke="#141414" stroke-width="3" />
+      <path d="M34 60c6-16 14-22 18-22s10 6 12 18" stroke="#FF6B4A" stroke-width="4" fill="none" stroke-linecap="round" />
+      <circle cx="42" cy="34" r="6" fill="#FFC21A" />
+      <path d="M98 10L70 58" stroke="#141414" stroke-width="7" stroke-linecap="round" />
+      <path d="M70 58l-5 10 9-5z" fill="#141414" />
+    </svg>
+  )
+}
+{
+  id === 'volumen' && (
+    <svg viewBox="0 0 120 90" aria-hidden="true">
+      <rect x="14" y="44" width="40" height="36" rx="3" fill="#E0A96D" stroke="#141414" stroke-width="3" />
+      <rect x="58" y="44" width="40" height="36" rx="3" fill="#E0A96D" stroke="#141414" stroke-width="3" />
+      <rect x="36" y="8" width="40" height="36" rx="3" fill="#F2C28A" stroke="#141414" stroke-width="3" />
+      <path d="M50 8v12h12V8M28 44v12h12V44M72 44v12h12V44" stroke="#141414" stroke-width="3" fill="#FFFFFF" />
+    </svg>
+  )
+}
+{
+  id === 'almacen' && (
+    <svg viewBox="0 0 120 90" aria-hidden="true">
+      <path d="M14 8v76M106 8v76M14 34h92M14 60h92" stroke="#141414" stroke-width="4" />
+      <rect x="22" y="14" width="22" height="20" fill="#F2C28A" stroke="#141414" stroke-width="2.5" />
+      <rect x="48" y="18" width="18" height="16" fill="#E0A96D" stroke="#141414" stroke-width="2.5" />
+      <rect x="72" y="40" width="26" height="20" fill="#F2C28A" stroke="#141414" stroke-width="2.5" />
+      <rect x="24" y="42" width="20" height="18" fill="#E0A96D" stroke="#141414" stroke-width="2.5" />
+      <rect x="50" y="66" width="24" height="18" fill="#F2C28A" stroke="#141414" stroke-width="2.5" />
+    </svg>
+  )
+}
+{
+  id === 'online' && (
+    <svg viewBox="0 0 120 90" aria-hidden="true">
+      <rect x="12" y="10" width="96" height="62" rx="6" fill="#FFFFFF" stroke="#141414" stroke-width="3" />
+      <path d="M12 22h96" stroke="#141414" stroke-width="3" />
+      <rect x="22" y="30" width="22" height="22" rx="3" fill="#B9A6F5" />
+      <rect x="50" y="30" width="22" height="22" rx="3" fill="#FFC21A" />
+      <rect x="78" y="30" width="22" height="22" rx="3" fill="#1FB5A5" />
+      <rect x="22" y="56" width="22" height="6" rx="3" fill="#FF6B4A" />
+      <rect x="50" y="56" width="22" height="6" rx="3" fill="#FF6B4A" />
+      <rect x="78" y="56" width="22" height="6" rx="3" fill="#FF6B4A" />
+      <path d="M40 84h40" stroke="#141414" stroke-width="4" stroke-linecap="round" />
+    </svg>
+  )
+}
+{
+  id === 'envio' && (
+    <svg viewBox="0 0 120 90" aria-hidden="true">
+      <rect x="10" y="22" width="60" height="42" rx="4" fill="#FFFFFF" stroke="#141414" stroke-width="3" />
+      <path d="M70 36h20l14 14v14H70z" fill="#FF6B4A" stroke="#141414" stroke-width="3" stroke-linejoin="round" />
+      <circle cx="30" cy="68" r="9" fill="#141414" />
+      <circle cx="88" cy="68" r="9" fill="#141414" />
+      <circle cx="30" cy="68" r="3" fill="#FFFFFF" />
+      <circle cx="88" cy="68" r="3" fill="#FFFFFF" />
+      <rect x="24" y="32" width="18" height="16" fill="#F2C28A" stroke="#141414" stroke-width="2" />
+      <path d="M2 34h8M0 44h8" stroke="#141414" stroke-width="3" stroke-linecap="round" />
+    </svg>
+  )
+}
+{
+  id === 'postventa' && (
+    <svg viewBox="0 0 120 90" aria-hidden="true">
+      <rect x="10" y="10" width="64" height="40" rx="12" fill="#FFFFFF" stroke="#141414" stroke-width="3" />
+      <path d="M24 50l-4 14 16-14" fill="#FFFFFF" stroke="#141414" stroke-width="3" stroke-linejoin="round" />
+      <path d="M24 26h36M24 36h24" stroke="#141414" stroke-width="3" stroke-linecap="round" />
+      <rect x="58" y="40" width="52" height="34" rx="10" fill="#1FB5A5" stroke="#141414" stroke-width="3" />
+      <path d="M72 57l6 6 12-12" stroke="#FFFFFF" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  )
+}
+
+<style>
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+</style>

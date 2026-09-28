@@ -1,0 +1,160 @@
+---
+// Botón amarillo del catálogo. Si el PDF ya está en `sitio.catalogoPdf`, lo
+// descarga; si no, dice "Pide el catálogo" y abre WhatsApp para pedirlo.
+import { sitio } from '../../data/sitio';
+import { enlaceWhatsApp, MENSAJE_CATALOGO } from '../../lib/whatsapp';
+
+interface Props {
+  variante: 'cabecera' | 'menu' | 'grande' | 'banda';
+}
+const { variante } = Astro.props;
+
+const pdf = sitio.catalogoPdf;
+const href = pdf ?? enlaceWhatsApp(MENSAJE_CATALOGO);
+const pendiente = !pdf && import.meta.env.DEV;
+
+const textos = pdf
+  ? { corto: 'Descargar catálogo PDF', largo: 'DESCARGA EL CATÁLOGO COMPLETO', detalle: 'PDF con todos los productos y detalles' }
+  : { corto: 'Pedir catálogo', largo: 'PIDE EL CATÁLOGO COMPLETO', detalle: 'Te lo enviamos por WhatsApp' };
+---
+
+<a
+  class:list={['catalogo', `catalogo--${variante}`, { pendiente }]}
+  href={href}
+  download={pdf ? '' : undefined}
+  title={pendiente ? 'PDF del catálogo pendiente: por ahora abre WhatsApp' : undefined}
+>
+  {
+    pdf ? (
+      <svg class="catalogo__icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 3v12M7 10l5 5 5-5M4 20h16" />
+      </svg>
+    ) : (
+      <svg class="catalogo__icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M6 3h9l4 4v14H6z" />
+        <path d="M14 3v5h5M9 12h7M9 16h5" />
+      </svg>
+    )
+  }
+  {
+    variante === 'grande' ? (
+      <span class="catalogo__texto">
+        {textos.largo}
+        <small>{textos.detalle}</small>
+      </span>
+    ) : variante === 'banda' ? (
+      <span>{textos.largo}</span>
+    ) : (
+      <span>{textos.corto}</span>
+    )
+  }
+</a>
+
+<style>
+  .catalogo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #ffc21a;
+    color: #141414;
+    font-weight: 800;
+    text-decoration: none;
+    transition: background-color 0.15s;
+  }
+  .catalogo:hover {
+    background: #ffcf4d;
+    color: #141414;
+  }
+  .catalogo__icono {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+  }
+
+  .catalogo--cabecera {
+    min-height: 48px;
+    padding: 0 18px;
+    border-radius: 12px;
+    border: 2px solid #141414;
+    font-size: 16px;
+    white-space: nowrap;
+  }
+
+  .catalogo--menu {
+    min-height: 58px;
+    justify-content: center;
+    border-radius: 14px;
+    border: 3px solid #141414;
+    font-size: 17px;
+    font-weight: 900;
+  }
+
+  .catalogo--grande {
+    align-self: flex-start;
+    min-height: 72px;
+    padding: 0 30px;
+    border-radius: 16px;
+    border: 3px solid #141414;
+    box-shadow: 0 6px 0 #141414;
+    gap: 14px;
+    font-weight: 900;
+    font-size: 20px;
+    letter-spacing: 0.02em;
+  }
+  .catalogo--grande:active {
+    transform: translateY(3px);
+    box-shadow: 0 3px 0 #141414;
+  }
+  .catalogo--grande .catalogo__icono {
+    width: 28px;
+    height: 28px;
+  }
+  .catalogo__texto {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+  }
+  .catalogo__texto small {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0;
+  }
+
+  .catalogo--banda {
+    flex-shrink: 0;
+    min-height: 64px;
+    padding: 0 28px;
+    border-radius: 14px;
+    gap: 12px;
+    font-weight: 900;
+    font-size: 18px;
+  }
+  .catalogo--banda .catalogo__icono {
+    width: 24px;
+    height: 24px;
+  }
+
+  .pendiente {
+    outline: 2px dashed #ff5a36;
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 639px) {
+    .catalogo--grande {
+      align-self: stretch;
+      min-height: 64px;
+      padding: 0 18px;
+      border-radius: 14px;
+      box-shadow: 0 5px 0 #141414;
+      gap: 12px;
+      font-size: 16px;
+    }
+    .catalogo--grande .catalogo__icono {
+      width: 24px;
+      height: 24px;
+    }
+    .catalogo__texto small {
+      font-size: 12px;
+    }
+  }
+</style>

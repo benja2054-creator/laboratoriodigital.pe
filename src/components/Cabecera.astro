@@ -1,0 +1,513 @@
+---
+// Cabecera compartida. Se adapta al tema de la página (claro o mazo).
+// Slots:
+//   acciones        → botones extra junto al menú en escritorio (p. ej. "Descargar catálogo")
+//   acciones-movil  → los mismos, dentro del menú de celular
+import { paginas, sitio, type PaginaId } from '../data/sitio';
+import { enlaceWhatsApp } from '../lib/whatsapp';
+import Matraz from './Matraz.astro';
+import IconoWhatsApp from './IconoWhatsApp.astro';
+
+interface Props {
+  tema: 'claro' | 'mazo';
+  actual: PaginaId;
+}
+const { tema, actual } = Astro.props;
+const wa = enlaceWhatsApp();
+---
+
+<header class="cabecera">
+  <div class="cabecera__fila">
+    <a href="/" class="marca" aria-label={`${sitio.marca}, inicio`}>
+      <span class="marca__icono"><Matraz tamano={24} /></span>
+      <span class="marca__nombre"><span>Laboratorio</span> <span>Digital</span></span>
+    </a>
+
+    <nav class="cabecera__nav" aria-label="Principal">
+      {
+        paginas.map((p) => (
+          <a href={p.ruta} aria-current={p.id === actual ? 'page' : undefined}>
+            {p.nombre}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="cabecera__acciones">
+      <slot name="acciones" />
+      {
+        tema === 'claro' && (
+          <a class="chip-wa" href={wa} aria-label={`Escríbenos por WhatsApp al ${sitio.whatsapp.corto}`}>
+            <span class="chip-wa__icono"><IconoWhatsApp tamano={30} /></span>
+            <span class="chip-wa__texto">
+              Escríbenos por WhatsApp<strong>{sitio.whatsapp.corto}</strong>
+            </span>
+          </a>
+        )
+      }
+    </div>
+
+    <button
+      type="button"
+      class="cabecera__abrir"
+      aria-label="Abrir menú"
+      aria-haspopup="dialog"
+      aria-expanded="false"
+      aria-controls="menu-movil"
+      data-abrir-menu
+    >
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true">
+        <path d="M3 6h14M3 14h14"></path>
+      </svg>
+    </button>
+  </div>
+
+  <dialog id="menu-movil" class="menu" aria-label="Menú">
+    <div class="menu__fila">
+      <a href="/" class="marca">
+        <span class="marca__icono"><Matraz tamano={20} /></span>
+        <span class="marca__nombre"><span>Laboratorio</span> <span>Digital</span></span>
+      </a>
+      <button type="button" class="menu__cerrar" data-cerrar-menu autofocus>
+        Cerrar
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true">
+          <path d="M3 3l10 10M13 3L3 13"></path>
+        </svg>
+      </button>
+    </div>
+    <nav class="menu__nav" aria-label="Principal">
+      {
+        paginas.map((p) => (
+          <a href={p.ruta} aria-current={p.id === actual ? 'page' : undefined}>
+            <span>{p.nombre}</span>
+            <span aria-hidden="true">→</span>
+          </a>
+        ))
+      }
+    </nav>
+    <div class="menu__acciones">
+      <slot name="acciones-movil" />
+      <a class="menu__wa" href={wa}>
+        <IconoWhatsApp tamano={22} />
+        Escríbenos por WhatsApp
+      </a>
+    </div>
+  </dialog>
+</header>
+
+<script>
+  const menu = document.getElementById('menu-movil') as HTMLDialogElement | null;
+  const abrir = document.querySelector<HTMLButtonElement>('[data-abrir-menu]');
+
+  if (menu && abrir) {
+    abrir.addEventListener('click', () => {
+      menu.showModal();
+      abrir.setAttribute('aria-expanded', 'true');
+    });
+    menu.addEventListener('close', () => abrir.setAttribute('aria-expanded', 'false'));
+    menu.querySelector('[data-cerrar-menu]')?.addEventListener('click', () => menu.close());
+    // Tocar fuera del panel o elegir un enlace también cierra el menú.
+    menu.addEventListener('click', (e) => {
+      if (e.target === menu || (e.target as Element).closest('a')) menu.close();
+    });
+    // Si la ventana crece hasta escritorio con el menú abierto, se cierra.
+    matchMedia('(min-width: 1100px)').addEventListener('change', (e) => {
+      if (e.matches && menu.open) menu.close();
+    });
+  }
+</script>
+
+<style>
+  /* ---------- Fila principal ---------- */
+  .cabecera__fila {
+    height: var(--cabecera-alto);
+    padding-inline: 32px;
+    display: flex;
+    align-items: center;
+    gap: 36px;
+  }
+
+  .marca {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--texto);
+    text-decoration: none;
+  }
+
+  .marca__icono {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .marca__nombre {
+    font-family: var(--fuente-marca);
+  }
+
+  .cabecera__nav {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  .cabecera__nav a {
+    color: var(--texto);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .cabecera__acciones {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .cabecera__abrir {
+    display: none;
+    margin-left: auto;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .chip-wa {
+    min-height: 48px;
+    padding: 4px 16px 4px 10px;
+    border-radius: 12px;
+    border: 2px solid var(--verde-wa);
+    background: #eaf6ef;
+    color: #141414;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background-color 0.15s;
+  }
+  .chip-wa:hover {
+    background: #d5eedf;
+  }
+  .chip-wa__icono {
+    color: #0f7a44;
+    display: flex;
+  }
+  .chip-wa__texto {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+  .chip-wa__texto strong {
+    font-size: 17px;
+    font-weight: 800;
+    color: #0f7a44;
+  }
+
+  /* ---------- Tema claro (Figtree, blanco) ---------- */
+  :global([data-tema='claro']) .cabecera {
+    border-bottom: 1px solid var(--linea);
+  }
+  :global([data-tema='claro']) .marca__icono {
+    background: #141414;
+    color: #ffffff;
+  }
+  :global([data-tema='claro']) .marca__nombre {
+    font-weight: 900;
+    font-size: 21px;
+    line-height: 1.05;
+  }
+  :global([data-tema='claro']) .cabecera__fila .marca__nombre > span {
+    display: block;
+  }
+  :global([data-tema='claro']) .cabecera__nav {
+    justify-content: center;
+    gap: 32px;
+    font-size: 17px;
+    font-weight: 600;
+  }
+  :global([data-tema='claro']) .cabecera__nav a:hover,
+  :global([data-tema='claro']) .cabecera__nav a[aria-current='page'] {
+    text-decoration: underline;
+    text-underline-offset: 6px;
+    text-decoration-thickness: 3px;
+    text-decoration-color: var(--acento);
+  }
+  :global([data-tema='claro']) .cabecera__nav a:hover:not([aria-current]) {
+    text-decoration-thickness: 2px;
+    text-decoration-color: var(--linea);
+  }
+  :global([data-tema='claro']) .cabecera__abrir {
+    border: none;
+    background: var(--gris);
+    color: #141414;
+  }
+
+  /* ---------- Tema mazo (Lilita One + Nunito, azul marino) ---------- */
+  :global([data-tema='mazo']) .cabecera__fila {
+    padding-inline: 64px;
+    justify-content: space-between;
+  }
+  :global([data-tema='mazo']) .marca__icono {
+    width: 44px;
+    height: 44px;
+    background: var(--amarillo);
+    color: var(--tinta);
+    border: 3px solid var(--tinta);
+    box-shadow: 0 4px 0 var(--tinta);
+  }
+  :global([data-tema='mazo']) .marca__nombre {
+    font-size: 24px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  :global([data-tema='mazo']) .cabecera__nav {
+    flex-grow: 0;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 800;
+  }
+  :global([data-tema='mazo']) .cabecera__nav a {
+    padding: 10px 18px;
+    border-radius: 999px;
+    border: 3px solid transparent;
+  }
+  :global([data-tema='mazo']) .cabecera__nav a:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+  :global([data-tema='mazo']) .cabecera__nav a[aria-current='page'] {
+    background: var(--amarillo);
+    color: var(--tinta);
+    border-color: var(--tinta);
+  }
+  :global([data-tema='mazo']) .cabecera__acciones:empty {
+    display: none;
+  }
+  :global([data-tema='mazo']) .cabecera__abrir {
+    border: 3px solid var(--tinta);
+    background: var(--crema);
+    color: var(--tinta);
+    box-shadow: 0 3px 0 var(--tinta);
+  }
+
+  /* ---------- Menú de celular ---------- */
+  .menu {
+    margin: 0;
+    width: 100%;
+    max-width: none;
+    height: 100dvh;
+    max-height: none;
+    border: none;
+    padding: 0 0 24px;
+    background: var(--fondo);
+    color: var(--texto);
+    overflow-y: auto;
+  }
+  .menu[open] {
+    display: flex;
+    flex-direction: column;
+    animation: menu-entra 0.2s ease-out;
+  }
+  @keyframes menu-entra {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+  }
+  .menu::backdrop {
+    background: rgba(8, 10, 40, 0.5);
+  }
+
+  .menu__fila {
+    min-height: 68px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .menu__fila .marca__icono {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+  }
+  .menu__fila .marca__nombre {
+    font-size: 18px;
+  }
+
+  .menu__cerrar {
+    min-height: 44px;
+    padding: 0 14px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 800;
+  }
+
+  .menu__nav {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .menu__nav a {
+    min-height: 64px;
+    padding: 0 18px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    text-decoration: none;
+    font-size: 20px;
+  }
+
+  .menu__acciones {
+    margin-top: auto;
+    padding: 0 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .menu__wa {
+    min-height: 58px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 17px;
+    font-weight: 900;
+    text-decoration: none;
+  }
+
+  :global([data-tema='claro']) .menu__fila {
+    border-bottom: 1px solid var(--linea);
+  }
+  :global([data-tema='claro']) .menu__cerrar {
+    border: none;
+    background: var(--gris);
+    color: #141414;
+  }
+  :global([data-tema='claro']) .menu__nav a {
+    background: var(--gris);
+    color: #141414;
+    font-weight: 800;
+    border: 2px solid transparent;
+  }
+  :global([data-tema='claro']) .menu__nav a[aria-current='page'] {
+    background: #ffffff;
+    border-color: #141414;
+  }
+  :global([data-tema='claro']) .menu__wa {
+    background: var(--verde-wa);
+    color: #ffffff;
+    box-shadow: 0 6px 0 #0a5c30;
+  }
+
+  :global([data-tema='mazo']) .menu {
+    background-color: var(--fondo);
+    background-image:
+      radial-gradient(rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px),
+      radial-gradient(circle at 10% 0%, rgba(139, 92, 246, 0.4), transparent 50%);
+    background-size: 22px 22px, 100% 100%;
+  }
+  :global([data-tema='mazo']) .menu__cerrar {
+    border: 2px solid var(--crema);
+    background: transparent;
+    color: var(--crema);
+  }
+  :global([data-tema='mazo']) .menu__nav a {
+    background: var(--crema);
+    color: var(--tinta);
+    border: 3px solid var(--tinta);
+    box-shadow: 0 4px 0 var(--tinta);
+    font-family: var(--fuente-marca);
+    font-weight: 400;
+    font-size: 22px;
+  }
+  :global([data-tema='mazo']) .menu__nav a[aria-current='page'] {
+    background: var(--amarillo);
+  }
+  :global([data-tema='mazo']) .menu__wa {
+    background: var(--amarillo);
+    color: var(--tinta);
+    border: 3px solid var(--tinta);
+    box-shadow: 0 5px 0 var(--tinta);
+  }
+
+  /* ---------- Puntos de quiebre ---------- */
+
+  /* El chip de WhatsApp no entra junto al resto por debajo de 1360 px:
+     sigue disponible en el pie y en el menú de celular. */
+  @media (max-width: 1359px) {
+    .chip-wa {
+      display: none;
+    }
+  }
+
+  /* Laptops bajas: cabecera más baja para dejar espacio al contenido. */
+  @media (min-width: 1100px) and (max-height: 820px) {
+    .cabecera__fila {
+      height: 72px;
+    }
+  }
+
+  @media (max-width: 1279px) {
+    .cabecera__fila {
+      gap: 24px;
+    }
+    :global([data-tema='claro']) .cabecera__nav {
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 1099px) {
+    .cabecera__nav,
+    .cabecera__acciones {
+      display: none;
+    }
+    .cabecera__abrir {
+      display: flex;
+    }
+    .cabecera__fila {
+      height: 68px;
+      padding-inline: 16px;
+    }
+    :global([data-tema='mazo']) .cabecera__fila {
+      padding-inline: 18px;
+    }
+    .cabecera__fila .marca__icono {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+    }
+    .cabecera__fila .marca__icono :global(svg) {
+      width: 18px;
+      height: 18px;
+    }
+    :global([data-tema='claro']) .cabecera__fila .marca__nombre {
+      font-size: 18px;
+    }
+    :global([data-tema='claro']) .cabecera__fila .marca__nombre > span {
+      display: inline;
+    }
+    :global([data-tema='mazo']) .cabecera__fila .marca__nombre {
+      font-size: 18px;
+    }
+    :global([data-tema='mazo']) .cabecera__fila .marca__icono {
+      box-shadow: 0 3px 0 var(--tinta);
+    }
+  }
+</style>

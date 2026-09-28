@@ -1,0 +1,22 @@
+---
+// Ícono del logo (matraz de laboratorio). Hereda el color del texto.
+interface Props {
+  tamano?: number;
+  grosor?: number;
+}
+const { tamano = 22, grosor = 2.6 } = Astro.props;
+---
+
+<svg
+  width={tamano}
+  height={tamano}
+  viewBox="0 0 30 30"
+  fill="none"
+  stroke="currentColor"
+  stroke-width={grosor}
+  stroke-linejoin="round"
+  aria-hidden="true"
+>
+  <path d="M11 3h8M12.5 3v8L5 24.5A2 2 0 0 0 6.8 27.5h16.4a2 2 0 0 0 1.8-3L17.5 11V3"></path>
+  <path d="M8.5 19h13"></path>
+</svg>

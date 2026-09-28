@@ -1,0 +1,57 @@
+---
+// Botón verde de WhatsApp (siempre verde, en todas las páginas).
+import IconoWhatsApp from './IconoWhatsApp.astro';
+
+interface Props {
+  href: string;
+  tamano?: 'grande' | 'normal';
+}
+const { href, tamano = 'normal' } = Astro.props;
+---
+
+<a class:list={['boton-wa', `boton-wa--${tamano}`]} href={href}>
+  <IconoWhatsApp tamano={tamano === 'grande' ? 28 : 24} />
+  <slot>Escríbenos por WhatsApp</slot>
+</a>
+
+<style>
+  .boton-wa {
+    min-height: 60px;
+    padding: 0 26px;
+    border-radius: 14px;
+    background: var(--verde-wa);
+    color: #ffffff;
+    box-shadow: 0 6px 0 #0a5c30;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    font-size: 18px;
+    font-weight: 900;
+    text-decoration: none;
+    transition: background-color 0.15s;
+  }
+  .boton-wa:hover {
+    background: var(--verde-wa-hover);
+    color: #ffffff;
+  }
+  .boton-wa:active {
+    transform: translateY(3px);
+    box-shadow: 0 3px 0 #0a5c30;
+  }
+  .boton-wa--grande {
+    min-height: 68px;
+    padding: 0 28px;
+    border-radius: 16px;
+    font-size: 20px;
+  }
+  @media (max-width: 639px) {
+    .boton-wa,
+    .boton-wa--grande {
+      min-height: 58px;
+      padding: 0 18px;
+      font-size: 17px;
+      gap: 10px;
+    }
+  }
+</style>

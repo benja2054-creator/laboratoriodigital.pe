@@ -1,0 +1,49 @@
+---
+// Estrella de cuatro puntas decorativa, posicionada de forma absoluta dentro
+// de su sección. `x`/`y` para escritorio y `xMovil`/`yMovil` para celular
+// (cualquier unidad CSS: '39%', '60px'...).
+interface Props {
+  color: string;
+  tamano?: number;
+  tamanoMovil?: number;
+  x: string;
+  y: string;
+  xMovil?: string;
+  yMovil?: string;
+  soloEscritorio?: boolean; // se oculta por debajo de 1100 px
+}
+const { color, tamano = 28, tamanoMovil = 22, x, y, xMovil = x, yMovil = y, soloEscritorio = false } = Astro.props;
+---
+
+<svg
+  class:list={['destello', { 'destello--escritorio': soloEscritorio }]}
+  style={`--x:${x};--y:${y};--xm:${xMovil};--ym:${yMovil};--t:${tamano}px;--tm:${tamanoMovil}px`}
+  viewBox="0 0 24 24"
+  aria-hidden="true"
+>
+  <path d="M12 1l2.6 8.4L23 12l-8.4 2.6L12 23l-2.6-8.4L1 12l8.4-2.6z" fill={color}></path>
+</svg>
+
+<style>
+  .destello {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    width: var(--t);
+    height: var(--t);
+    pointer-events: none;
+  }
+  @media (max-width: 1099px) {
+    .destello--escritorio {
+      display: none;
+    }
+  }
+  @media (max-width: 639px) {
+    .destello {
+      left: var(--xm);
+      top: var(--ym);
+      width: var(--tm);
+      height: var(--tm);
+    }
+  }
+</style>
