@@ -141,7 +141,10 @@
   color: var(--oscuro);
   background: var(--tinte) repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.05) 0 10px, transparent 10px 20px);
   opacity: 0;
-  transition: opacity 0.25s;
+  z-index: 1;
+  /* La imagen que se va no se desvanece: se queda opaca debajo de la nueva y
+     desaparece recién cuando la nueva ya cubrió todo (sin asomar el dibujo). */
+  transition: opacity 0s linear 0.25s;
 }
 .mz-carta__foto--img {
   width: 100%;
@@ -157,6 +160,8 @@
 }
 .mz-carta__foto--visible {
   opacity: 1;
+  z-index: 2;
+  transition: opacity 0.25s ease-out;
 }
 .mz-arte {
   width: 96px;
