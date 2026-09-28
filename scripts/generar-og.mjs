@@ -147,8 +147,8 @@ const mazo = () => {
       font-size: 20px; display: flex; align-items: center; justify-content: center; }
     .carta__foto { height: 178px; border-radius: 12px; border: 4px solid #0B0E33;
       background-size: cover; background-position: center; }
-    .carta__nombre { margin-top: 14px; text-align: center; font-family: 'Lilita One'; font-size: 27px;
-      color: #FFF8E7; -webkit-text-stroke: 6px #0B0E33; paint-order: stroke fill; letter-spacing: 0.02em; }
+    .carta__nombre { margin-top: 14px; text-align: center; font-family: 'Lilita One'; font-size: 23px; white-space: nowrap;
+      color: #FFF8E7; -webkit-text-stroke: 6px #0B0E33; paint-order: stroke fill; letter-spacing: 0.01em; }
     .carta__clase { margin-top: 6px; align-self: center; padding: 4px 12px; border-radius: 999px;
       background: var(--tinte); color: var(--oscuro); font-weight: 900; font-size: 11px; letter-spacing: 0.04em; white-space: nowrap; }`,
     `<div class="texto">
