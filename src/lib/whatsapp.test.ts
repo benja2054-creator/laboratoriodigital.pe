@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { enlaceWhatsApp, mensajeMazo, mensajeMerch, unirConY, MENSAJE_AGENDAR } from './whatsapp';
+import { enlaceWhatsApp, mensajeMazo, mensajeMerch, unirConY, MENSAJE_CATALOGO } from './whatsapp';
 import { resumirMazo, soles, textosCombo } from './mazo';
 
 describe('textosCombo', () => {
@@ -129,8 +129,8 @@ describe('enlaceWhatsApp', () => {
   });
 
   it('codifica el mensaje', () => {
-    expect(enlaceWhatsApp(MENSAJE_AGENDAR)).toBe(
-      'https://wa.me/51966495267?text=Hola%2C%20quiero%20agendar%20una%20llamada%20con%20Laboratorio%20Digital.',
+    expect(enlaceWhatsApp(MENSAJE_CATALOGO)).toBe(
+      'https://wa.me/51966495267?text=Hola%2C%20%C2%BFme%20pueden%20enviar%20el%20cat%C3%A1logo%20completo%20de%20merch%20para%20empresas%3F',
     );
   });
 });

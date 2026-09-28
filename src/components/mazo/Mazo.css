@@ -665,22 +665,6 @@
   background: #ffd84d;
   color: #0b0e33;
 }
-.mz-panel__agendar {
-  min-height: 44px;
-  border-radius: 14px;
-  border: 3px solid #14184a;
-  color: #14184a;
-  font-weight: 800;
-  font-size: 14px;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.mz-panel__agendar:hover {
-  background: #14184a;
-  color: #fff8e7;
-}
 .mz-panel a:focus-visible,
 .mz-panel button:focus-visible {
   outline-color: #14184a;
@@ -731,6 +715,17 @@
 }
 .mz-panel--hoja .mz-panel__cabeza h2 {
   font-size: 26px;
+}
+/* El título y "Seguir eligiendo" quedan fijos arriba mientras se baja por
+   la hoja (-12px = el relleno superior de la hoja). */
+.mz-panel--hoja .mz-panel__cabeza {
+  position: sticky;
+  top: -12px;
+  z-index: 2;
+  margin: -12px -18px 0;
+  padding: 12px 18px 10px;
+  background: #fff8e7;
+  box-shadow: 0 2px 0 #eadfc6;
 }
 .mz-panel__seguir {
   min-height: 44px;
@@ -1267,9 +1262,6 @@
   .mz-panel--lateral .mz-panel__enviar {
     min-height: 48px;
     box-shadow: 0 4px 0 #0b0e33;
-  }
-  .mz-panel--lateral .mz-panel__agendar {
-    min-height: 40px;
   }
 }
 /* Con la vista de módulos abierta, la página de fondo no se desplaza. */

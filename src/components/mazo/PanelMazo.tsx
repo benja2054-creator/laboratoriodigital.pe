@@ -2,7 +2,7 @@
 // celular va dentro de la hoja inferior.
 import { COMODIN } from '../../data/mazo';
 import { claseDe, soles, textosCombo, type ResumenMazo } from '../../lib/mazo';
-import { enlaceWhatsApp, mensajeMazo, MENSAJE_AGENDAR } from '../../lib/whatsapp';
+import { enlaceWhatsApp, mensajeMazo } from '../../lib/whatsapp';
 import { estiloClase } from './Carta';
 import { IconoCerrar, IconoEstrella, IconoFlechaAbajo } from './Iconos';
 
@@ -138,9 +138,6 @@ export function PanelMazo(p: Props) {
 
       <a class="mz-panel__enviar mz-chunky" href={enlaceWhatsApp(mensajeMazo(resumen))}>
         ¡Enviar mi mazo por WhatsApp!
-      </a>
-      <a class="mz-panel__agendar" href={enlaceWhatsApp(MENSAJE_AGENDAR)}>
-        Prefiero agendar una llamada
       </a>
     </div>
   );

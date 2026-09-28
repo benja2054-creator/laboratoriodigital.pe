@@ -15,7 +15,6 @@ export function unirConY(partes: readonly string[]): string {
 }
 
 export const MENSAJE_CREA_MARCA = 'Hola, quiero crear mi propia marca de productos. ¿Me explican cómo funciona?';
-export const MENSAJE_AGENDAR = 'Hola, quiero agendar una llamada con Laboratorio Digital.';
 // Se usa mientras el PDF del catálogo no esté publicado.
 export const MENSAJE_CATALOGO = 'Hola, ¿me pueden enviar el catálogo completo de merch para empresas?';
 
