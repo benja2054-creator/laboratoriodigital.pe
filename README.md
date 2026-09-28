@@ -3,6 +3,14 @@
 Sitio estático hecho con [Astro](https://astro.build) y Preact (solo para las partes interactivas).
 El encargo original está en `LEEME-CLAUDE-CODE.md` y los diseños de referencia en `diseno/`.
 
+## Publicación
+
+- **Sitio en línea:** https://laboratoriodigital-pe.pages.dev (Cloudflare Pages).
+- **Código:** https://github.com/benja2054-creator/laboratoriodigital.pe
+- **Cómo se actualiza:** cada cambio subido a la rama `main` de GitHub se publica solo en ~1 minuto.
+- **Configuración en Cloudflare:** framework Astro, comando `npm run build`, carpeta `dist`, Node 22 (`.node-version`).
+- **Dominio propio:** cuando se compre `laboratoriodigital.pe`, se conecta en Cloudflare → proyecto → Custom domains, y se agrega `site` en `astro.config.mjs`.
+
 ## Comandos
 
 | Comando | Qué hace |
