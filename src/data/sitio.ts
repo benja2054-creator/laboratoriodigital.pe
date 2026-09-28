@@ -47,7 +47,7 @@ export const legales = [
   { nombre: 'Política de privacidad', ruta: '/privacidad' },
 ] as const;
 
-// Google Analytics 4. Pendiente: el ID de medición (empieza con "G-", se ve
-// en Analytics → Administrar → Flujos de datos). Solo se carga si el
+// Google Analytics 4: ID de medición de la propiedad "Web Laboratorio Digital"
+// (Analytics → Administrar → Flujos de datos → Sitio web). Solo se carga si el
 // visitante acepta las cookies de analítica en el aviso de cookies.
-export const googleAnalyticsId: string | null = null;
+export const googleAnalyticsId: string | null = 'G-8G1HB5BXFK';

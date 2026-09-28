@@ -58,6 +58,17 @@ import { googleAnalyticsId } from '../data/sitio';
       document.head.appendChild(s);
     };
 
+    const borrarCookiesAnalitica = () => {
+      const dominios = ['', location.hostname, '.' + location.hostname];
+      document.cookie.split(';').forEach((c) => {
+        const nombre = c.split('=')[0].trim();
+        if (!/^_ga/.test(nombre)) return;
+        dominios.forEach((d) => {
+          document.cookie = nombre + '=; Max-Age=0; path=/' + (d ? '; domain=' + d : '');
+        });
+      });
+    };
+
     const mostrar = () => {
       aviso.hidden = false;
       document.documentElement.classList.add('con-aviso-cookies');
@@ -78,8 +89,12 @@ import { googleAnalyticsId } from '../data/sitio';
         guardar(valor);
         ocultar();
         if (valor === 'aceptado') cargarAnalitica();
-        // Si retira un consentimiento ya dado, recargamos para descargar Analytics.
-        else if (antes === 'aceptado' && cargado) location.reload();
+        // Si retira un consentimiento ya dado, borramos las cookies de Analytics
+        // (_ga, _ga_…) y, si ya estaba cargado, recargamos para descargarlo.
+        else if (antes === 'aceptado') {
+          borrarCookiesAnalitica();
+          if (cargado) location.reload();
+        }
       }),
     );
 
