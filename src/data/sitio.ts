@@ -53,3 +53,8 @@ export const legales = [
 // (Analytics → Administrar → Flujos de datos → Sitio web). Solo se carga si el
 // visitante acepta las cookies de analítica en el aviso de cookies.
 export const googleAnalyticsId: string | null = 'G-8G1HB5BXFK';
+
+// Google Search Console: código de verificación de la propiedad
+// https://www.laboperu.com/ (método "Etiqueta HTML"). No borrarlo: si se quita,
+// Search Console pierde la verificación.
+export const googleSiteVerification = '-6kjUdfE23CRVncUWmiYMWJi6rLUpUy-CqeoAQBxyvY';

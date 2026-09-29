@@ -17,7 +17,7 @@ import '../styles/global.css';
 import Cabecera from '../components/Cabecera.astro';
 import Pie from '../components/Pie.astro';
 import AvisoCookies from '../components/AvisoCookies.astro';
-import { sitio, type PaginaId } from '../data/sitio';
+import { googleSiteVerification, sitio, type PaginaId } from '../data/sitio';
 import versionesOg from '../data/og-versiones.json';
 
 interface Props {
@@ -55,6 +55,7 @@ const imagen = new URL(version ? `${imagenCompartir}?v=${version}` : imagenCompa
     <title>{titulo}</title>
     <meta name="description" content={descripcion} />
     <meta name="theme-color" content={colorNavegador} />
+    <meta name="google-site-verification" content={googleSiteVerification} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     {canonica && <link rel="canonical" href={canonica} />}
