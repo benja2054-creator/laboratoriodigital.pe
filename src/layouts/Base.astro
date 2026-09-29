@@ -29,8 +29,10 @@ interface Props {
   // Imagen al compartir el enlace (1200×630, en public/og/, se generan con
   // `npm run og`). Las páginas sin imagen propia usan la de la portada.
   imagenCompartir?: string;
+  // Datos estructurados (JSON-LD de schema.org) para buscadores.
+  datosEstructurados?: Record<string, unknown>;
 }
-const { titulo, descripcion, tema, actual, acento, imagenCompartir = '/og/inicio.jpg' } = Astro.props;
+const { titulo, descripcion, tema, actual, acento, imagenCompartir = '/og/inicio.jpg', datosEstructurados } = Astro.props;
 
 const colorNavegador = tema === 'mazo' ? '#14184A' : '#FFFFFF';
 // Con build.format 'file' la ruta llega como "/merch-empresas.html" o
@@ -54,6 +56,7 @@ const imagen = new URL(version ? `${imagenCompartir}?v=${version}` : imagenCompa
     <meta name="description" content={descripcion} />
     <meta name="theme-color" content={colorNavegador} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     {canonica && <link rel="canonical" href={canonica} />}
 
     <meta property="og:type" content="website" />
@@ -69,6 +72,7 @@ const imagen = new URL(version ? `${imagenCompartir}?v=${version}` : imagenCompa
     <meta property="og:image:alt" content={titulo} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content={imagen} />
+    {datosEstructurados && <script type="application/ld+json" set:html={JSON.stringify(datosEstructurados)} />}
   </head>
   <body data-tema={tema} style={acento ? `--acento: ${acento}` : undefined}>
     <Cabecera tema={tema} actual={actual}>

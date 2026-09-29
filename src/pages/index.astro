@@ -2,10 +2,37 @@
 // Portada: logo (en la cabecera), una frase y las 3 opciones.
 import Base from '../layouts/Base.astro';
 import IconoWhatsApp from '../components/IconoWhatsApp.astro';
-import { paginas } from '../data/sitio';
+import { paginas, sitio } from '../data/sitio';
 import { enlaceWhatsApp } from '../lib/whatsapp';
 
 const ruta = Object.fromEntries(paginas.map((p) => [p.id, p.ruta]));
+
+// Ficha de la empresa para Google (schema.org). Solo datos que ya son
+// públicos en el sitio. Las redes se agregan solas cuando tengan URL.
+const web = Astro.site?.href ?? Astro.url.origin + '/';
+const empresa = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  '@id': web + '#empresa',
+  name: sitio.marca,
+  legalName: sitio.razonSocial,
+  taxID: sitio.ruc,
+  description: sitio.descripcion,
+  url: web,
+  logo: new URL('/logo.png', web).href,
+  image: new URL('/og/inicio.jpg', web).href,
+  telephone: '+' + sitio.whatsapp.numero,
+  email: sitio.correo ?? undefined,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: sitio.direccion.calle,
+    addressLocality: sitio.direccion.distrito,
+    addressRegion: sitio.direccion.ciudad,
+    addressCountry: sitio.direccion.pais,
+  },
+  areaServed: { '@type': 'Country', name: 'Perú' },
+  sameAs: sitio.redes.flatMap((r) => (r.url ? [r.url] : [])),
+};
 ---
 
 <Base
@@ -13,6 +40,7 @@ const ruta = Object.fromEntries(paginas.map((p) => [p.id, p.ruta]));
   descripcion="Diseño, marketing, video y merchandising para empresas, marcas y creadores. Elige por dónde empezar y escríbenos por WhatsApp."
   tema="claro"
   actual="inicio"
+  datosEstructurados={empresa}
 >
   <main class="portada contenedor">
     <section class="intro">

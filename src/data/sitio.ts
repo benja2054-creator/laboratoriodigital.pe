@@ -7,6 +7,8 @@ export const sitio = {
   razonSocial: 'LABORATORIO DIGITAL E.I.R.L.',
   ruc: '20616378555',
   ciudad: 'Lima, Perú',
+  // Domicilio fiscal (el mismo de la Política de privacidad).
+  direccion: { calle: 'Calle William King 155', distrito: 'Pueblo Libre', ciudad: 'Lima', pais: 'PE' },
   descripcion: 'Diseño, marketing, video y merchandising para empresas, marcas y creadores.',
   anio: 2026,
 
