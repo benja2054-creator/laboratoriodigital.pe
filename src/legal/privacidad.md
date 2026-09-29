@@ -10,6 +10,7 @@ En Laboratorio Digital cuidamos tus datos personales. Esta política explica qu�
 - **RUC:** 20616378555
 - **Domicilio fiscal:** Calle William King 155, Pueblo Libre, Lima, Perú
 - **WhatsApp:** +51 966 495 267
+- **Correo:** contacto@laboperu.com
 
 ## 2. Qué datos recopilamos
 
@@ -89,6 +90,7 @@ Tienes derecho a:
 **Cómo ejercerlos:**
 Envía tu solicitud por cualquiera de estos canales:
 - **WhatsApp:** +51 966 495 267, con el mensaje "Derechos de datos personales".
+- **Correo:** contacto@laboperu.com, con el asunto "Derechos de datos personales".
 - **Por escrito:** carta dirigida a LABORATORIO DIGITAL E.I.R.L., Calle William King 155, Pueblo Libre, Lima.
 
 En la solicitud indica tu nombre, qué derecho quieres ejercer y adjunta una copia de tu documento de identidad, para verificar que eres tú.

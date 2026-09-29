@@ -16,8 +16,8 @@ export const sitio = {
     corto: '966 495 267',
   },
 
-  // Pendiente: correo de contacto.
-  correo: null as string | null,
+  // Correo de contacto (Zoho Mail).
+  correo: 'contacto@laboperu.com' as string | null,
 
   // Pendiente: usuarios de redes. Poner la URL completa, por ejemplo
   // 'https://www.instagram.com/laboratoriodigital'.
