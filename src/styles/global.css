@@ -5,8 +5,8 @@
   --margen: clamp(16px, 4vw, 56px);
   --ancho-max: 1440px;
   --cabecera-alto: 92px;
-  --verde-wa: #128C4A; /* botón de WhatsApp, siempre verde */
-  --verde-wa-hover: #0E7A40;
+  --verde-wa: #0E7A40; /* botón de WhatsApp, siempre verde (contraste 5.4:1 con blanco) */
+  --verde-wa-hover: #0B6535;
 }
 
 [data-tema='claro'] {
